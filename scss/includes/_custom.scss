@@ -1,0 +1,71 @@
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1350px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1270px
+);
+
+
+// 1.root
+
+:root {
+  font-size: 62.5%;
+}
+
+
+// 2.colors
+
+$color-white: #fff;
+$color-black: #000;
+
+$color-gray:    #282828;
+
+::selection {
+  background: $color-gray;
+  color: $color-white;
+}
+
+// 3.Themes
+
+$theme-colors: (
+  "primary": $color-white,
+  "secondary": $color-black
+);
+
+
+// 4.Typography
+
+$font-size-base: 1.8rem;
+
+$font-family-base: 'Caslon', sans-serif;
+$font-family-alternative: 'Nova-Light', sans-Serif;
+$headings-color: $color-gray;
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$h1-font-size: 4.2rem;
+$h2-font-size: 3.4rem;
+$headings-font-weight: $font-weight-bold;
+
+$body-bg: $color-white;
+$body-color: $color-gray;
+$navbar-dark-color: $color-white;
+
+
+// 6.Buttons
+
+$btn-font-weight: $font-weight-bold;
+$btn-font-size: 1.8rem;
+$btn-padding-x: 1.9rem;
+$btn-padding-y: 0.8rem;
+$btn-border-radius: 999rem;
