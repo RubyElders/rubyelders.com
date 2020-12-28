@@ -1,0 +1,28 @@
+on:
+  push:                                                                                        
+    branches: [ master ]
+  pull_request:                                                                                
+    branches: [ master ]         
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+    - run: yarn install
+    - run: yarn run build
+    - uses: JamesIves/github-pages-deploy-action@3.7.1
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      with:
+        GIT_CONFIG_NAME: 'RubyElders bot'
+        GIT_CONFIG_EMAIL: 'info@rubyelders.com'
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: _site # The folder the action should deploy.
+        CLEAN: true # Automatically remove deleted files from the deploy branch
