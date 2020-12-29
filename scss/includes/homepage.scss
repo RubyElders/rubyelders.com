@@ -82,6 +82,7 @@
   }
 
   &.divider-end {
+    padding: 12rem 0 5rem 0;
     &:before {
       background-image: url("../img/divider_end.svg");
     }
@@ -219,8 +220,15 @@
   }
 }
 
+@include media-breakpoint-up(lg) {
+  .container.content {
+    position: relative;
+    top: -10rem;
+  }
+}
+
 .tags {
-  margin-bottom: 12rem;
+  margin-bottom: 5rem;
 }
 
 .btn.btn-primary {
