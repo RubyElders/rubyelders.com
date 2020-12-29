@@ -14,6 +14,11 @@
     height: 56vw;
   }
 
+  @include media-breakpoint-up(lg) {
+    background-size: contain;
+    height: 50vw;
+  }
+
   .book-wrapper {
     display: flex;
     align-items: center;
@@ -47,6 +52,10 @@
 
     @include media-breakpoint-up(md) {
       flex: 0 0 30.25vw;
+    }
+
+    @include media-breakpoint-up(lg) {
+      flex: 0 0 10vw;
     }
 
     &:before {
@@ -212,12 +221,8 @@
 
 .tags {
   margin-bottom: 12rem;
-
-  @include media-breakpoint-up(md) {
-    margin-bottom: 5rem;
-  }
 }
 
-.btn.btn-primary.btn-megaprimary {
-  font-size: 3.4rem;
+.btn.btn-primary {
+  font-size: 18px;
 }

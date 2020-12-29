@@ -10,26 +10,16 @@
     padding: 2.4rem;
 
     @include hover-focus-active() {
-      background: transparent;
-      border-color: $color-black;
-    }
-
-    &:hover {
-      &:after {
-        width: 100%;
+      .dots {
+        &:before,
+        &:after {
+          border: 0px solid $white;
+          transition: border .5s;
+          width: 0;
+          height: 0;
+        }
       }
-    }
 
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      background: currentColor;
-      opacity: .07;
-      transition: width .2s;
     }
 
     .dots {
