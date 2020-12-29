@@ -67,6 +67,7 @@ function compileSass(done) {
         .pipe(postcss(processors))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./_site/css/'))
+        .on('finish', browser.reload, '*.css')
         ;
 
   done();
