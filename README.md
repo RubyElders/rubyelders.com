@@ -18,9 +18,11 @@ yarn run server
 yarn run build
 ```
 
-## deploy (push to gh-pages)
+## manual deploy (push to gh-pages)
 
 ```
 yarn run build
 yarn run deploy
 ```
+
+*Usually there is no need for manual deploy. `master` branch is automatically deployed by GitHub actions.*
