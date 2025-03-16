@@ -21,3 +21,23 @@
     }
   }
 }
+
+@keyframes wave-hat {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(-15deg); }
+  60% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+#hat {
+  transform-origin: center top;
+}
+
+.header-logo:hover #hat {
+  animation: wave-hat 1.5s ease-in-out forwards;
+  transform-origin: center top;
+}
+
+#logo-svg {
+  overflow: visible;
+}
