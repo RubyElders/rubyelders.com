@@ -9,20 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '14'
-    - uses: actions/cache@v4
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-    - run: yarn install
-    - run: yarn run build
+    - run: ruby generate.rb
+    - run: mv .gitignore.build .gitignore
     - uses: JamesIves/github-pages-deploy-action@v4
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       with:
         git-config-name: 'RubyElders bot'
         git-config-email: 'info@rubyelders.com'
         branch: gh-pages # The branch the action should deploy to.
-        folder: _site # The folder the action should deploy.
+        folder: . # The folder the action should deploy.
         clean: true # Automatically remove deleted files from the deploy branch

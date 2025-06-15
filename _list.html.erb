@@ -1,0 +1,11 @@
+<main>
+  <h1>Latest writings</h1>
+  <ul class="post-list">
+    <% @writings.each do |writing| %>
+    <li>
+      <a href="<%= writing[:url] %>"><%= writing[:title] %></a>
+      <time datetime="<%= writing[:datetime] %>"><%= writing[:released_at] %></time>
+    </li>
+    <% end %>
+  </ul>
+</main>

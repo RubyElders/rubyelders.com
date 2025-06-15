@@ -1,0 +1,233 @@
+@font-face {
+  font-family: "Caslon";
+  src: url("../assets/fonts/caslon.eot");
+  src: local("☺"), url("../assets/fonts/caslon.woff") format("woff"), url("../assets/fonts/caslon.ttf") format("truetype"), url("../assets/fonts/caslon.svg") format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Caslon";
+  src: url("../assets/fonts/caslon-bold.eot");
+  src: local("☺"), url("../assets/fonts/caslon-bold.woff") format("woff"), url("../assets/fonts/caslon-bold.ttf") format("truetype"), url("../assets/fonts/caslon-bold.svg") format("svg");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Caslon";
+  src: url("../assets/fonts/caslon-bold-italic.eot");
+  src: local("☺"), url("../assets/fonts/caslon-bold-italic.woff") format("woff"), url("../assets/fonts/caslon-bold-italic.ttf") format("truetype"), url("../assets/fonts/caslon-bold-italic.svg") format("svg");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Nova-Light";
+  src: url("../assets/fonts/Nova-Light.eot");
+  src: local("☺"), url("../assets/fonts/Nova-Light.woff") format("woff"), url("../assets/fonts/Nova-Light.ttf") format("truetype"), url("../assets/fonts/Nova-Light.svg") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nova-Light";
+  src: url("../assets/fonts/Nova-Light-It.eot");
+  src: local("☺"), url("../assets/fonts/Nova-Light-It.woff") format("woff"), url("../assets/fonts/Nova-Light-It.ttf") format("truetype"), url("../assets/fonts/Nova-Light-It.svg") format("svg");
+  font-weight: 300;
+  font-style: italic;
+}
+
+:root {
+  --font-base: "Caslon", serif;
+  --font-alt: "Nova-Light", sans-serif;
+
+  --color-text: hsl(0, 0%, 0%);
+  --color-bg: hsl(0, 0%, 100%);
+  --color-accent: hsl(0, 0%, 16%);
+  --color-accent-hover: hsl(146, 24%, 32%);
+  --color-code-bg: hsl(240, 20%, 95%);
+
+  --line-height-base: 1.5;
+  --gap-base: 1.25rem;
+  --gap-large: 3.125rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 1.125rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  margin: 0;
+  padding: var(--gap-base);
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: var(--gap-large);
+  margin-bottom: var(--gap-base);
+}
+
+h1 {
+  font-size: 2.625rem;
+}
+
+h2 {
+  font-size: 2.125rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: var(--gap-base);
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+code {
+  font-family: monospace;
+  background: var(--color-code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 90%;
+}
+
+pre code {
+  display: block;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+pre {
+  background: var(--color-code-bg);
+  border-left: 4px solid var(--color-accent);
+  margin-bottom: var(--gap-base);
+}
+
+.post-meta {
+  font-size: 1.3rem;
+  font-family: var(--font-alt);
+  color: hsl(0, 0%, 40%);
+}
+
+.post-meta img {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px black;
+}
+
+.avatar-text-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.site-header {
+  width: 100%;
+}
+
+.site-logo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes wave-hat {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-15deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  70% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#hat {
+  transform-origin: center top;
+}
+
+.greet {
+  animation: wave-hat 1.5s ease-in-out forwards;
+}
+
+@keyframes wash-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(180deg);
+  }
+  15% {
+    transform: rotate(180deg);
+  }
+  15% {
+    transform: rotate(180deg);
+  }
+  70% {
+    transform: rotate(2310deg);
+  }
+  100% {
+    transform: rotate(2520deg);
+  }
+}
+
+.spin {
+  animation: wash-spin 3s ease-in-out forwards;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin-bottom: var(--gap-base);
+  font-size: var(--font-size-base);
+  font-weight: bold;
+}
+
+.post-list time {
+  display: inline-block;
+  margin-left: 1rem;
+  font-family: var(--font-alt);
+  color: hsl(0, 0%, 40%);
+  font-size: var(--font-size-meta);
+}

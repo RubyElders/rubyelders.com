@@ -1,28 +1,19 @@
 # rubyelders.com
 
-## setup
+## start "dev server"
 
 ```
-yarn install
-```
-
-## start dev server
-
-```
-yarn run server
+npx --yes chokidar-cli "**/*.{erb,json,md,rb}" -c "ruby generate.rb"
 ```
 
 ## build
 
 ```
-yarn run build
+ruby generate.rb
 ```
 
 ## manual deploy (push to gh-pages)
 
-```
-yarn run build
-yarn run deploy
-```
+Just commit changes, other to ruby generate.rb, there is no build needed.
 
 *Usually there is no need for manual deploy. `master` branch is automatically deployed by GitHub actions.*
