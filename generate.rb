@@ -44,6 +44,7 @@ post_template = File.read('_post.html.erb')
 
 # Generate writings index page
 @writings = writings
+@title = "Writings"
 @content = ERB.new(list_template).result(binding)
 html_output = ERB.new(layout_template).result(binding)
 File.write('writings.html', html_output)
@@ -56,6 +57,7 @@ FileUtils.mkdir_p('writings')
 writings.each do |w|
   markdown = File.read(w[:source])
   @writing = w
+  @title = w[:title]
   @content = Kramdown::Document.new(markdown).to_html
 
   # Render the post template with writing and HTML content
