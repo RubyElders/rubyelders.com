@@ -136,7 +136,8 @@ pre {
   color: hsl(0, 0%, 40%);
 }
 
-.post-meta img, img.avatar {
+.post-meta img,
+img.avatar {
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
@@ -151,9 +152,35 @@ img.avatar {
 }
 
 .avatar-text-group {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5em;
+}
+
+.avatar-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  white-space: nowrap;
+}
+
+.avatar-meta {
+  white-space: nowrap;
+}
+
+.avatar-meta::before {
+  content: "— ";
+}
+
+@media (max-width: 360px) {
+  .avatar-meta {
+    white-space: normal;
+  }
+
+  .avatar-meta::before {
+    content: "";
+  }
 }
 
 .site-header {
