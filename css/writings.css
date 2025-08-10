@@ -220,7 +220,6 @@ img.avatar {
 
 .post-list {
   list-style: none;
-  padding: 0;
 }
 
 .post-list li {
@@ -248,6 +247,10 @@ hr:before {
   background: transparent url("../assets/img/divider.svg") no-repeat center;
   width: 10.4rem;
   height: 2.8rem;
+}
+
+hr.end:before {
+  background: transparent url("../assets/img/divider_end.svg") no-repeat center;
 }
 
 ul {
