@@ -1,10 +1,3 @@
-"use strict";
-
-
-$(function(){
-
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     const hat = document.getElementById("hat");
