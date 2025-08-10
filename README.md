@@ -3,7 +3,7 @@
 ## start "dev server"
 
 ```
-npx --yes chokidar-cli "**/*.{erb,json,md,rb}" -c "ruby generate.rb"
+npx --yes chokidar-cli "**/*.{erb,json,md,rb,ebr}" -c "ruby generate.rb"
 ```
 
 ## build

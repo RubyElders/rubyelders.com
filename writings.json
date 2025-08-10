@@ -1,11 +1,12 @@
 [
   {
     "source": "md/popular-gems-1.md",
-    "title": "Helping Popular RubyGems Stay Healthy",
-    "published_at": "15.6.2025",
-    "slug": "popular-gems-1",
+    "title": "We ❤️ Ruby — March 2025: Our First Deep Dive into the RubyGems.org Ecosystem",
+    "published_at": "11.8.2025",
+    "slug": "2025-03-we-love-ruby-march-2025",
     "author": "simi",
     "author_avatar_url": "https://avatars.githubusercontent.com/u/193936?v=4",
+    "author_url": "https://github.com/simi",
     "place": "Praha, Žižkov"
   }
 ]

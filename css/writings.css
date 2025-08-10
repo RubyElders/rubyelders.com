@@ -46,7 +46,7 @@
 
   --line-height-base: 1.5;
   --gap-base: 1.25rem;
-  --gap-large: 3.125rem;
+  --gap-large: 1.125rem;
 }
 
 * {
@@ -55,7 +55,7 @@
 
 body {
   font-family: var(--font-base);
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.5;
@@ -136,13 +136,18 @@ pre {
   color: hsl(0, 0%, 40%);
 }
 
-.post-meta img {
+.post-meta img, img.avatar {
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
   box-shadow: 0 0 0 2px black;
+}
+
+img.avatar {
+  position: relative;
+  top: 8px;
 }
 
 .avatar-text-group {
@@ -230,4 +235,25 @@ pre {
   font-family: var(--font-alt);
   color: hsl(0, 0%, 40%);
   font-size: var(--font-size-meta);
+}
+
+hr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+hr:before {
+  content: "";
+  background: transparent url("../assets/img/divider.svg") no-repeat center;
+  width: 10.4rem;
+  height: 2.8rem;
+}
+
+ul {
+  list-style: none;       /* hide default bullets */
+  padding-left: 1.2em;    /* space for the arrow */
+}
+ul li::marker {
+  content: "→ ";
 }
