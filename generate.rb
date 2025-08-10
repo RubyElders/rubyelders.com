@@ -1,9 +1,12 @@
 require 'bundler/inline'
 
-gemfile do
+gemfile(true) do
+  source 'https://rubygems.org'
+
   gem "json"
   gem "erb"
   gem "kramdown"
+  gem "nokogiri"
 end
 
 require 'json'
@@ -11,6 +14,7 @@ require 'erb'
 require 'date'
 require 'fileutils'
 require 'kramdown'
+require 'nokogiri'
 
 # Load writings.json
 writings_data = JSON.parse(File.read('writings.json'))
@@ -27,6 +31,7 @@ writings = writings_data.map do |w|
     slug: w['slug'],
     published_at: w['published_at'],
     author: w['author'],
+    author_url: w['author_url'],
     author_avatar_url: w['author_avatar_url'],
     place: w['place']
   }
@@ -59,6 +64,17 @@ writings.each do |w|
   # Now inject post content into layout
   full_html = ERB.new(layout_template).result(binding)
 
+  # Outside links to new window
+  full_html = Nokogiri::HTML.fragment(full_html).tap do |doc|
+    doc.css('a').each do |node|
+      node['href'] ||= '#'
+      # Add attributes to external links only:
+      if node['href'] =~ %r{\A(?:\w+:)?//}
+        node['target'] = '_blank'
+        node['rel'] = 'nofollow noopener'
+      end
+    end
+  end.to_html
   # Write to file
   File.write("writings/#{w[:slug]}.html", full_html)
   puts "Generated writings/#{w[:slug]}.html"

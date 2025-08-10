@@ -1,0 +1,296 @@
+<body>
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writings | Ruby Elders</title>
+    <link rel="stylesheet" href="/css/writings.css">
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <!-- Syntax Highlighting: Prism.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css">
+  
+  
+    <header class="site-header">
+      <a href="/writings.html">
+        <svg viewbox="0 0 279.09328 71.770356" xmlns="http://www.w3.org/2000/svg">
+          <path d="m 236.07491,44.384808 c 0,-0.1 -0.2,-0.3 -0.4,-0.4 -1.2,-0.5 -3.7,-0.9 -5.7,-0.9 -3.8,0 -6.5,2.3 -6.5,5.4 0,3 2.2,4.9 4.7,5.9 2,0.8 5.6,1.6 5.6,4.2 0,1.4 -1.6,2.8 -3.2,2.8 -2.2,0 -4.4,-1.8 -5.6,-4.6 -0.4,-1 -0.6,-1.2 -0.9,-1.2 -0.3,0 -0.4,0.3 -0.4,0.7 l 0.3,3.9 c 0,0.7 0.2,1 0.9,1.2 1.9,0.4 3.7,1 5.4,1 4,0 7.5,-3 7.5,-6.5 0,-3.7 -3.5,-5.1 -6.3,-6.3 -2.8,-1.2 -4,-2.1 -4,-3.3 0,-1.3 1.5,-2.4 3.3,-2.4 2,0 4.2,1.8 4.9,4 0.3,0.8 0.4,0.9 0.8,0.9 0.3,0 0.4,-0.1 0.4,-0.4 v -0.3 z"></path>
+          <path d="m 211.77491,47.384808 v -3.3 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.7,0.3 -0.8,0.3 -1.3,0.5 -2.9,1.2 -5.7,2 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 7.5 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -1.1,0 -2,-0.7 -2,-2.7 v -8.2 c 1.2,-1.7 1.8,-2.3 2.6,-2.3 0.3,0 0.7,0.2 1.2,0.4 0.9,0.4 1.6,0.6 2.1,0.6 1.5,0 2.6,-1 2.6,-2.4 0,-1.3 -1.1,-2.3 -2.6,-2.3 -1.7,-0.2 -4,1.6 -5.8,3.8"></path>
+          <path d="m 200.57491,56.284808 c -0.1,0 -0.2,0.1 -0.3,0.2 -1.5,2 -3.9,3.2 -6,3.2 -3.3,0 -5.9,-3.2 -5.9,-7.4 0,-0.1 0,-0.3 0,-0.6 h 8.2 2.9 c 1.1,0 1.5,-0.5 1.5,-1.3 0,-0.3 0,-0.7 -0.2,-1.2 -1.2,-3.4 -4.4,-5.8 -8.3,-5.8 -5.2,0 -9.2,4.4 -9.2,10 0,5 4,9.4 8.6,9.4 3.9,0 7.2,-2.3 9,-5.3 0.2,-0.3 0.3,-0.6 0.3,-0.9 -0.1,-0.1 -0.3,-0.3 -0.6,-0.3 z m -8.4,-11.7 c 2.5,0.1 3.9,1.9 3.9,4.9 0,0.3 -0.1,0.7 -0.9,0.7 h -2.8 -3.9 c 0.3,-3.7 1.5,-5.6 3.7,-5.6 z"></path>
+          <path d="m 179.87491,60.784808 c -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -25.1 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 6.9 c -1.4,-0.6 -2.6,-1 -3.9,-1 -6.1,0 -9.8,4 -9.8,10.4 0,5.3 3.5,9.2 8.3,9.2 1.8,0 4.4,-1 5.5,-2 v 1.7 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.4,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c -0.1,-0.2 -0.2,-0.2 -0.3,-0.3 z m -6.9,-2.1 c -1,1.4 -1.6,1.8 -3,1.8 -3.6,0 -5.9,-3.3 -5.9,-8.3 0,-4.7 1.8,-7.8 4.6,-7.8 2.2,0 3.6,1.4 4.2,3.7 z"></path>
+          <path d="m 153.37491,32.484808 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 20.2 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.5 c -1.1,0 -2,-0.7 -2,-2.7 z"></path>
+          <path d="m 123.27491,47.484808 h 6.4 c 3,0 4.9,2.8 4.9,5.2 v 0.6 c 0,0.2 0,0.2 0.2,0.2 h 1.1 c 0.1,0 0.2,0 0.2,-0.2 v -13.5 c 0,-0.2 0,-0.2 -0.2,-0.2 h -1.1 c -0.2,0 -0.2,0 -0.2,0.2 v 0.6 c 0,2.4 -1.9,5.2 -4.9,5.2 h -6.4 v -8.2 c 0,-3.6 0.3,-4.2 4.6,-4.2 4.5,0 9.1,1.1 11.7,4.7 0.8,1.1 1.3,1.7 1.8,1.7 0.3,0 0.4,-0.2 0.4,-0.6 0,-0.2 -0.1,-0.6 -0.3,-1 l -2.5,-5.7 c -0.3,-0.6 -0.3,-0.6 -1.1,-0.6 h -24.3 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 25 c 0.6,0 0.7,-0.2 0.9,-0.6 l 2,-6.4 c 0.2,-0.5 0.2,-0.9 0.2,-1.1 0,-0.3 -0.1,-0.6 -0.3,-0.6 -0.5,0 -1,0.8 -2,2.2 -2.7,3.9 -4.6,4.9 -11.5,4.9 -3.3,0 -4.6,-0.5 -4.6,-1.6 z"></path>
+          <path d="m 91.2,62.77035 -1.3,2.700008 c -0.3,0.9 -1.1,1.6 -2.2,1.6 h -0.4 c -2.4,0 -3.6,0.9 -3.6,2.6 0,1.2 1,2.1 2.3,2.1 1.8,0 3.1,-1.2 4.5,-4.3 L 99.000004,48.87035 c 1.099996,-2.5 2.299996,-3.2 3.499996,-3.3 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.100004,0.1 1.500004,0.5 1.500004,1.3 0,0.4 -0.1,1 -0.3,1.3 l -3.900004,8.5 -4,-9.1 c -0.3,-0.5 -0.3,-0.9 -0.3,-1.1 0,-0.6 0.6,-0.8 1.6,-0.8 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 H 81.8 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.3,0 1.9,0.6 2.5,2 z"></path>
+          <path d="m 70.7,43.07035 c -2.3,0 -4.4,1.1 -6,2.4 v -13 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 25.1 l 0.7,-0.1 1.7,-1.6 0.5,-0.3 c 2.6,1.4 4.2,1.9 6.2,1.9 5.2,0 9.4,-4.6 9.4,-10.2 0,-5.4 -3.3,-9.3 -7.8,-9.3 z m -1.5,18.3 c -0.9,0 -2,-0.4 -2.8,-1 -1.4,-1.1 -1.6,-1.6 -1.6,-4 v -9.6 c 1.2,-0.9 1.7,-1.1 3,-1.1 3.7,0 6.3,3.5 6.3,8.2 0,4.2 -2.1,7.5 -4.9,7.5 z"></path>
+          <path d="m 42,62.47035 c 2.5,0 4.4,-0.7 6.2,-2.9 v 2.4 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.3,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c 0,-0.1 -0.1,-0.2 -0.2,-0.2 -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -12.7 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.3 c -1.5,2.3 -2.6,3.3 -4.3,3.3 -1.7,0 -3.1,-1.5 -3.1,-3.3 v -13.3 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.2 c -0.1,3.1 2.5,5.1 5.9,5.1"></path>
+          <path d="m 31.2,60.47035 h -0.8 c -1.3,0 -2.5,-0.5 -3.3,-1.7 -0.9,-1.3 -1.3,-2.7 -3,-6.2 -1.5,-2.9 -2.4,-4.5 -3.9,-5.9 -0.2,-0.2 -0.3,-0.3 -0.3,-0.4 0,-0.1 0.1,-0.2 0.4,-0.2 4.2,-1 6.4,-3.3 6.4,-6.7 0,-4.8 -4.6,-7.7 -12.1,-7.7 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 13.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -2.4,0 -3.2999999,-0.6 -3.2999999,-3.6 v -9.8 H 14 c 1.1,0.8 1.6,1.5 2.8,3.8 1.5,2.9 3.1,6.3 4.9,10.8 0.1,0.2 0.2,0.3 0.5,0.3 h 9 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.1 0,-0.2 -0.2,-0.2 z m -19.1,-14.6 c -0.5,0 -1.2,0 -2.1999999,-0.1 v -9.6 c 0,-2.9 0.6999999,-3.4 3.1999999,-3.4 5.3,0 7.9,2 7.9,5.9 0.1,4.4 -3.4,7.2 -8.9,7.2 z"></path>
+          <g id="hat">
+            <path d="m 239.54646,29.219694 c 2.4,1.6 4.3,2.8 6.3,3.9 0.3,0.2 0.6,0.3 0.9,0.5 5.4,3.1 10.3,5.5 15.1,7.4 1.7,0.7 3.4,1.3 4.9,1.8 0.9,-2.5 2.3,-5.8 4.2,-9.1 2.9,-5 6.4,-9.1 7.9,-10.7 0.4,-0.4 0.3,-1 -0.2,-1.2 l -37.7,-21.7 c -0.5,-0.3 -1,0 -1.2,0.5 -0.6,2.1 -2.4,7.2 -5.3,12.2 -1.9,3.3 -4.1,6.1 -5.8,8.2 1.2,1.1 2.6,2.2 4,3.3 2.1,1.6 4.5,3.4 6.9,4.9 z"></path>
+            <path d="m 275.04646,48.019694 c -5.1,0.5 -10.3,-0.3 -15.3,-1.7 -5.8,-1.6 -11.3,-4 -16.4,-7 -5.1,-3 -10,-6.6 -14.3,-10.8 -3.6,-3.6 -7,-7.7 -9.1,-12.4 -0.2,-0.3 0.2,-0.6 0.5,-0.5 0,0 0.1,0 0.1,0.1 3.3,3.8 6.9,7.1 10.8,10.1 2.3,1.7 4.5,3.4 6.9,5 2.1,1.4 4.2,2.8 6.4,4 0.3,0.2 0.6,0.3 0.9,0.5 4.9,2.8 10,5.4 15.3,7.5 4.6,1.8 9.2,3.4 14.2,4.3 h 0.1 c 0.3,0.4 0.3,0.9 -0.1,0.9 z"></path>
+          </g>
+        </svg>
+      </a>
+    </header>
+
+    <article>
+  <header>
+    <h1>We ❤️ Ruby — March 2025: Our First Deep Dive into the RubyGems.org Ecosystem</h1>
+
+    <p class="post-meta">
+    <span class="avatar-text-group">
+      By
+      <img id="avatar-photo" src="https://avatars.githubusercontent.com/u/193936?v=4">
+      <a href="https://github.com/simi" target="_blank" rel="nofollow noopener">simi</a> — August 11, 2025 — Praha, Žižkov
+    </span>
+    </p>
+  </header>
+
+  <p><em>Note: This post looks back at work we did in March 2025. Some things have changed since then — we’ll mention those in the update notes.</em></p>
+
+<hr>
+
+<p>At <a href="https://rubyelders.com" target="_blank" rel="nofollow noopener">RubyElders.com</a>, we’ve been working on keeping the Ruby ecosystem healthy—especially for popular gems that millions of people use but that might not have active maintainers anymore. Our mission for this project was simple: <strong>make sure these gems still work on today’s Ruby versions, and fix them if they don’t</strong>.</p>
+
+<p>To do this, we built an automated system that compares monthly RubyGems.org download data to spot the fastest-growing gems. We then filtered out the “big players” from AWS, Google, Rails, and Bundler, so we could focus on smaller, community-driven projects.</p>
+
+<p>One of the fun parts? We made a <strong>small AI-powered tool that runs entirely on our own machines</strong>. It scans GitHub Actions workflow files (YAML) for each gem, extracts details about what’s being tested, and flags potential maintenance gaps—like missing CI or not testing on current Ruby versions. This meant we could quickly spot repositories that might be in trouble, without relying on guesswork.</p>
+
+<p>From the top 200 gems, the AI+automation combo revealed something surprising: <strong>7 hugely popular gems (4M+ downloads/month each) had no CI at all</strong>.</p>
+
+<p><em>You can explore the full and raw output of this automation in <a href="https://docs.google.com/spreadsheets/d/1ElW-oXbkGHxUHqpi-_MrFvX_nt8OUPdUmN1ixBy_o_k/edit?usp=sharing" target="_blank" rel="nofollow noopener">Google Sheet</a>.</em></p>
+
+<p>An important side benefit of this work is that it shows how <strong>each codebase is different</strong>. Even though all 7 gems had missing CI, the type of maintenance they actually need varies a lot. That’s why usual oversimplified “health metrics” like <em>last commit date</em> or <em>latest release date</em> can be misleading—they don’t tell the full story of what care a project really needs.</p>
+
+<p>Here’s the story of what we found and how we helped.</p>
+
+<hr>
+
+<h2 id="rb-fseventhttpsrubygemsorggemsrb-fsevent"><a href="https://rubygems.org/gems/rb-fsevent" target="_blank" rel="nofollow noopener"><code>rb-fsevent</code></a></h2>
+
+<h3 id="summary">Summary</h3>
+
+<p><a href="https://rubygems.org/gems/rb-fsevent" target="_blank" rel="nofollow noopener"><code>rb-fsevent</code></a> is a small but important macOS-only gem used to detect file changes. It’s a dependency of <a href="https://rubygems.org/gems/listen" target="_blank" rel="nofollow noopener"><code>listen</code></a>, which in turn powers <a href="https://rubygems.org/gems/guard" target="_blank" rel="nofollow noopener"><code>guard</code></a>—a tool that was a leader in test-driven development workflows around 2020. Even today, <a href="https://rubygems.org/gems/listen" target="_blank" rel="nofollow noopener"><code>listen</code></a> is downloaded almost <strong>3 million times each month</strong>, so keeping this gem healthy benefits a lot of developers, even if they don’t use it directly.</p>
+
+<h3 id="work-done">Work done</h3>
+
+<p>Despite being macOS-specific, we were able to debug and set up CI for it entirely through GitHub Actions, without having a Mac at hand. We submitted a pull request to add the missing CI, and it was accepted and merged the very next day—a rare “happy path” contribution where everything went smoothly.</p>
+
+<p>→ <a href="https://github.com/guard/rb-fsevent/pull/96" target="_blank" rel="nofollow noopener">Adding CI pull request</a></p>
+
+<h3 id="maintenance-needs-note">Maintenance needs note</h3>
+
+<p>This is a <strong>feature-complete gem</strong>. It generally only needs updates when Apple releases a new version of macOS or Xcode, or when a new major Ruby version comes out. In between, it can run for long stretches without requiring changes.</p>
+
+<hr>
+
+<h2 id="uberhttpsrubygemsorggemsuber-and-declarativehttpsrubygemsorggemsdeclarative">
+<a href="https://rubygems.org/gems/uber" target="_blank" rel="nofollow noopener"><code>uber</code></a> and <a href="https://rubygems.org/gems/declarative" target="_blank" rel="nofollow noopener"><code>declarative</code></a>
+</h2>
+
+<h3 id="summary-1">Summary</h3>
+
+<p><a href="https://rubygems.org/gems/uber" target="_blank" rel="nofollow noopener"><code>uber</code></a> and <a href="https://rubygems.org/gems/declarative" target="_blank" rel="nofollow noopener"><code>declarative</code></a> are small Ruby gems that work together as dependencies of <a href="https://rubygems.org/gems/representable" target="_blank" rel="nofollow noopener"><code>representable</code></a>, which is in turn used by <a href="https://rubygems.org/google-apis-core" target="_blank" rel="nofollow noopener"><code>google-apis-core</code></a>—a library downloaded around <strong>6 million times each month</strong>. While these two gems aren’t often used directly today, they still play a role deep in a lot of dependency chains.</p>
+
+<h3 id="work-done-1">Work done</h3>
+
+<p>Both gems were still using Travis CI, which no longer works, so we replaced it entirely with GitHub Actions. While doing that, we also ensured tests ran on modern Ruby versions by porting them to newer libraries and fixing compatibility issues.</p>
+
+<p>During this process, we had the chance to connect with <img src="https://avatars.githubusercontent.com/u/10406?v=4" class="avatar"> <a href="http://github.com/apotonick" target="_blank" rel="nofollow noopener">Nick Sutterer (@apotonick)</a>, the original author of these gems. At first, he was skeptical about whether it even made sense to update them—but the discussion quickly became a friendly and interesting exchange. That conversation led us into exploring his <a href="https://trailblazer.to/2.1" target="_blank" rel="nofollow noopener">Trailblazer project</a>, which is well worth checking out if you’re interested in higher-level architecture for Ruby applications.</p>
+
+<p>As a side note, <a href="https://rubygems.org/gems/representable" target="_blank" rel="nofollow noopener"><code>representable</code></a> (which depends on both gems) turned out to be an interesting project in its own right—there’s nothing quite like it in Ruby, and it gave us some <a href="https://serde.rs/" target="_blank" rel="nofollow noopener">Rust Serde</a> vibes. This is one of the fun parts of this work: exploring other projects and discovering those unknown or forgotten “gems” (pun intended) hidden in the dependency tree.</p>
+
+<ul>
+  <li><a href="https://github.com/apotonick/uber/pull/25" target="_blank" rel="nofollow noopener">Replacing CI with GitHub Actions <code>uber</code> PR</a></li>
+  <li><a href="https://github.com/apotonick/declarative/pull/10" target="_blank" rel="nofollow noopener">Replacing CI with GitHub Actions <code>declarative</code> PR</a></li>
+</ul>
+
+<h3 id="maintenance-needs-note-1">Maintenance needs note</h3>
+
+<p>These are <strong>low-activity, stable codebases written in plain Ruby</strong>. They don’t need frequent updates—just a quick check when a new major Ruby version is released.</p>
+
+<hr>
+
+<h2 id="rest-clienthttpsrubygemsorggemsrest-client"><a href="https://rubygems.org/gems/rest-client" target="_blank" rel="nofollow noopener"><code>rest-client</code></a></h2>
+
+<h3 id="summary-2">Summary</h3>
+
+<p><a href="https://rubygems.org/gems/rest-client" target="_blank" rel="nofollow noopener"><code>rest-client</code></a> was one of the best-known Ruby HTTP clients, downloaded around <strong>6 million times each month</strong>. It’s used both directly by developers and indirectly through many other gems, including:</p>
+
+<ul>
+  <li>
+<a href="https://rubygems.org/gems/oauth" target="_blank" rel="nofollow noopener"><code>oauth</code></a> (~2.2M downloads per month, <strong>dev dependency only</strong>)</li>
+  <li>
+<a href="https://rubygems.org/gems/gitlab-labkit" target="_blank" rel="nofollow noopener"><code>gitlab-labkit</code></a> (~1M downloads per month, <strong>dev dependency only</strong>)</li>
+  <li>
+<a href="https://rubygems.org/gems/kubeclient" target="_blank" rel="nofollow noopener"><code>kubeclient</code></a> (~1M downloads per month, replaced by Faraday in version 5 — <a href="https://github.com/ManageIQ/kubeclient/pull/466" target="_blank" rel="nofollow noopener">PR</a> merged, but release not yet made)</li>
+  <li>
+<a href="https://rubygems.org/gems/discordrb-webhooks" target="_blank" rel="nofollow noopener"><code>discordrb-webhooks</code></a> (~1M downloads per month, <strong>runtime dependency</strong>)</li>
+  <li>
+<a href="https://rubygems.org/gems/aliyun-sdk" target="_blank" rel="nofollow noopener"><code>aliyun-sdk</code></a> (~1M downloads per month, <strong>runtime dependency</strong>)</li>
+</ul>
+
+<p>Many top dependents have already found ways to remove <a href="https://rubygems.org/gems/rest-client" target="_blank" rel="nofollow noopener"><code>rest-client</code></a> or restrict it to non-production paths. But for runtime dependencies like <a href="https://rubygems.org/gems/discordrb-webhooks" target="_blank" rel="nofollow noopener"><code>discordrb-webhooks</code></a> and <a href="https://rubygems.org/gems/aliyun-sdk" target="_blank" rel="nofollow noopener"><code>aliyun-sdk</code></a>, migrating to Faraday (or similar) is still needed.</p>
+
+<h3 id="work-done-2">Work done</h3>
+
+<p>We reached out to the maintainers and managed to get in touch with one of them. They confirmed there are <strong>no plans to maintain the gem</strong> and supported the idea of a final release followed by archiving. They also agreed it would be helpful to provide a migration guide to Faraday.</p>
+
+<p>We created that migration guide and contributed it directly to Faraday’s documentation, then reviewed the most-downloaded dependent gems to see how they were handling the transition. Where possible, we explored contributing migrations ourselves — for example, replacing it in <a href="https://rubygems.org/gems/discordrb-webhooks" target="_blank" rel="nofollow noopener"><code>discordrb-webhooks</code></a> looks entirely doable.</p>
+
+<p>To keep <a href="https://rubygems.org/gems/rest-client" target="_blank" rel="nofollow noopener"><code>rest-client</code></a> functional until the deprecation is finalized, we fixed failing specs, cleaned up Gemfile issues, and added a minimal CI setup.</p>
+
+<ul>
+  <li>
+<a href="https://github.com/lostisland/faraday/pull/1625" target="_blank" rel="nofollow noopener">Migration guide in Faraday docs PR</a>
+    <ul>
+      <li>(<a href="https://lostisland.github.io/faraday/#/getting-started/rest-client-migration" target="_blank" rel="nofollow noopener">published here</a>)</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://github.com/rest-client/rest-client/pull/831" target="_blank" rel="nofollow noopener">Final CI and fixes for rest-client PR</a> <em>(pending)</em>
+</li>
+</ul>
+
+<p>Unfortunately, after the initial conversation, we haven’t received any follow-up from the maintainers — so the final release and archiving are still pending. We hope to reconnect soon to finish the process.</p>
+
+<h3 id="maintenance-needs-note-2">Maintenance needs note</h3>
+
+<p>This gem is effectively <strong>deprecated</strong>. The safest path forward is to archive it and direct users to <a href="https://rubygems.org/gems/faraday" target="_blank" rel="nofollow noopener"><code>Faraday</code></a> (with the migration guide provided). Until then, only security fixes and migration support for dependent projects should be considered.</p>
+
+<hr>
+
+<h2 id="simplecovjsonformatterhttpsrubygemsorggemssimplecovjsonformatter"><a href="https://rubygems.org/gems/simplecov_json_formatter" target="_blank" rel="nofollow noopener"><code>simplecov_json_formatter</code></a></h2>
+
+<h3 id="summary-3">Summary</h3>
+
+<p><a href="https://rubygems.org/gems/simplecov_json_formatter" target="_blank" rel="nofollow noopener"><code>simplecov_json_formatter</code></a> is a very small gem—only about 3 files and under 100 lines of code—whose sole purpose is to generate JSON output for <a href="https://github.com/simplecov-ruby/simplecov" target="_blank" rel="nofollow noopener"><code>SimpleCov</code></a> — library behind most of the code coverage metrics in whole Ruby ecosystem. It’s already listed as a dependency of SimpleCov, so it is not really stand alone since it assumes <a href="https://github.com/simplecov-ruby/simplecov" target="_blank" rel="nofollow noopener"><code>SimpleCov</code></a> is loaded before it can do anything.</p>
+
+<h3 id="work-done-3">Work done</h3>
+
+<p>The gem had CI configured on CircleCI, but it was broken. We replaced it with GitHub Actions to get the tests running again.</p>
+
+<p>While doing that, we realized this gem was a perfect candidate to merge back into the main <a href="https://github.com/simplecov-ruby/simplecov" target="_blank" rel="nofollow noopener"><code>SimpleCov</code></a> repository. It’s tiny, single-purpose, and already tied to SimpleCov’s lifecycle. So we proposed merging it back and cleaning up the duplication.</p>
+
+<p>Before we could do that, we had to fix the CI in the <a href="https://github.com/simplecov-ruby/simplecov" target="_blank" rel="nofollow noopener"><code>SimpleCov</code></a> repo as well. The fix was merged, but the merge-back PR is still waiting for review. We’ve been trying to get attention from other maintainers, so far without success.</p>
+
+<ul>
+  <li><a href="https://github.com/simplecov-ruby/simplecov/pull/1131" target="_blank" rel="nofollow noopener">Fix CI in <code>SimpleCov</code></a></li>
+  <li>
+<a href="https://github.com/codeclimate-community/simplecov_json_formatter" target="_blank" rel="nofollow noopener">Replace CircleCI with GitHub Actions in <code>simplecov_json_formatter</code></a> <em>(pending)</em>
+</li>
+  <li>
+<a href="https://github.com/simplecov-ruby/simplecov/pull/1130" target="_blank" rel="nofollow noopener">Propose merge of json formatter into <code>SimpleCov</code></a> <em>(pending)</em>
+</li>
+</ul>
+
+<h3 id="maintenance-needs-note-3">Maintenance needs note</h3>
+
+<p>This gem doesn’t need to exist separately. It should be merged back into <a href="https://github.com/simplecov-ruby/simplecov" target="_blank" rel="nofollow noopener"><code>SimpleCov</code></a> and retired as an independent gem. Until that happens, any maintenance is minimal and tied directly to SimpleCov’s own release cycle.</p>
+
+<hr>
+
+<h2 id="oshttpsrubygemsorggemsos"><a href="https://rubygems.org/gems/os" target="_blank" rel="nofollow noopener"><code>os</code></a></h2>
+
+<h3 id="summary-4">Summary</h3>
+
+<p>The <a href="https://rubygems.org/gems/os" target="_blank" rel="nofollow noopener"><code>os</code></a> gem provides cross-platform detection for Windows, Linux, and macOS. It’s downloaded around <strong>6.5 million times each month</strong> and is a dependency of <a href="https://rubygems.org/gems/googleauth" target="_blank" rel="nofollow noopener"><code>googleauth</code></a>—meaning it’s pulled into a huge number of Ruby projects indirectly. Because it deals directly with platform-specific details, it needs to be kept in sync with changes in operating systems and Ruby itself.</p>
+
+<h3 id="work-done-4">Work done</h3>
+
+<p>When we first looked at <a href="https://rubygems.org/gems/os" target="_blank" rel="nofollow noopener"><code>os</code></a>, it had no working CI and a few quirks in its test suite and runtime behavior. What started as a simple plan to “just add GitHub Actions” quickly turned into a series of four pull requests to get everything into shape:</p>
+
+<ul>
+  <li><a href="https://github.com/rdp/os/pull/80" target="_blank" rel="nofollow noopener">Properly parse Windows x64 Ruby</a></li>
+  <li><a href="https://github.com/rdp/os/pull/81" target="_blank" rel="nofollow noopener">Reset OS state for each spec example</a></li>
+  <li><a href="https://github.com/rdp/os/pull/82" target="_blank" rel="nofollow noopener">Accept any amount of CPU cores in tests</a></li>
+  <li><a href="https://github.com/rdp/os/pull/83" target="_blank" rel="nofollow noopener">Add GitHub Actions CI</a></li>
+</ul>
+
+<p>Along the way, we also got in touch with <img src="https://avatars.githubusercontent.com/u/19505?v=4" class="avatar"> <a href="https://github.com/pboling" target="_blank" rel="nofollow noopener">Peter Boling (@pboling)</a>, a fellow RubyGems maintainer who has been adopting and maintaining various widely-used gems. If you rely on his work, please check his profile and consider <a href="https://github.com/sponsors/pboling" target="_blank" rel="nofollow noopener">sponsorship</a> to support the ongoing maintenance.</p>
+
+<h3 id="maintenance-needs-note-4">Maintenance needs note</h3>
+
+<p>The <a href="https://rubygems.org/gems/os" target="_blank" rel="nofollow noopener"><code>os</code></a> gem is stable but needs <strong>occasional reviews</strong>—mainly when new operating system releases introduce changes, or when new Ruby versions are published. With a working CI in place, spotting and fixing these issues should now be much easier with more dynamic setup (like run CI periodically).</p>
+
+<hr>
+
+<h2 id="xpathhttpsrubygemsorggemsxpath"><a href="https://rubygems.org/gems/xpath" target="_blank" rel="nofollow noopener"><code>xpath</code></a></h2>
+
+<h3 id="summary-5">Summary</h3>
+
+<p><a href="https://rubygems.org/gems/xpath" target="_blank" rel="nofollow noopener"><code>xpath</code></a> is a low-level gem used by <a href="https://rubygems.org/gems/capybara" target="_blank" rel="nofollow noopener"><code>Capybara</code></a>, the core library for acceptance and web testing in Ruby and Rails projects. With around <strong>5 million downloads each month</strong>, it plays a key role in automated testing—even though most developers never interact with it directly.</p>
+
+<h3 id="work-done-5">Work done</h3>
+
+<p>We got in touch with original author <img src="https://avatars.githubusercontent.com/u/134?v=4" class="avatar"> <a href="https://github.com/jnicklas" target="_blank" rel="nofollow noopener">Jonas Nicklas (@jnicklas)</a> and were granted access to the repository. This allowed us to add a proper GitHub Actions CI setup to ensure compatibility with modern Ruby and <a href="https://rubygems.org/gems/nokogiri" target="_blank" rel="nofollow noopener"><code>Nokogiri</code></a> releases.</p>
+
+<p>→ <a href="https://github.com/teamcapybara/xpath/pull/104" target="_blank" rel="nofollow noopener">Modern GitHub Actions pull request</a></p>
+
+<p>While working on <a href="https://rubygems.org/gems/xpath" target="_blank" rel="nofollow noopener"><code>xpath</code></a>, we discovered something bigger: <strong>Capybara itself currently had no active maintainers</strong>. Given Capybara’s importance—it’s the default acceptance test framework for Rails—this was a significant finding. We started contributing there as well, beginning with <a href="https://github.com/teamcapybara/capybara/pull/2811" target="_blank" rel="nofollow noopener">a PR to improve maintenance</a>.</p>
+
+<p><em>August 2025 update:</em> Fortunately, one of <a href="https://rubygems.org/gems/capybara" target="_blank" rel="nofollow noopener"><code>Capybara</code></a>’s maintainers has since returned, and the project is back in good hands. We plan to keep actively contributing to both <a href="https://rubygems.org/gems/xpath" target="_blank" rel="nofollow noopener"><code>xpath</code></a> and <a href="https://rubygems.org/gems/capybara" target="_blank" rel="nofollow noopener"><code>Capybara</code></a> to help ensure their stability.</p>
+
+<h3 id="maintenance-needs-note-5">Maintenance needs note</h3>
+
+<p><a href="https://rubygems.org/gems/xpath" target="_blank" rel="nofollow noopener"><code>xpath</code></a> implements a <strong>subset of the <a href="https://www.w3.org/TR/1999/REC-xpath-19991116/" target="_blank" rel="nofollow noopener">XPath 1.0 specification</a></strong> tailored for <a href="https://rubygems.org/gems/capybara" target="_blank" rel="nofollow noopener">Capybara</a>’s needs. It is fully complete for this purpose, and there’s no significant usage outside Capybara (<a href="https://rubygems.org/gems/xpath/reverse_dependencies" target="_blank" rel="nofollow noopener">reverse dependencies list</a>). Maintenance mainly means staying in sync with <a href="https://rubygems.org/gems/nokogiri" target="_blank" rel="nofollow noopener"><code>Nokogiri</code></a> and supported Ruby versions. A durable CI setup—periodically checking against the latest <a href="https://rubygems.org/gems/nokogiri" target="_blank" rel="nofollow noopener"><code>Nokogiri</code></a>, running <code>ruby-head</code> builds, and verifying <a href="https://rubygems.org/gems/capybara" target="_blank" rel="nofollow noopener">Capybara</a> integration—would provide early warnings if upstream changes require fixes.</p>
+
+<hr>
+
+<h2 id="final-notes">Final notes</h2>
+
+<h3 id="a-deep-dive-into-rubygemsorghttpsrubygemsorg">A deep dive into <a href="https://rubygems.org/" target="_blank" rel="nofollow noopener">RubyGems.org</a>
+</h3>
+
+<p>This March 2025 update wraps up our first <strong>We ❤️ Ruby</strong> community effort — and it was both fun and fascinating to dig deep into the <a href="https://rubygems.org/" target="_blank" rel="nofollow noopener">RubyGems.org</a> ecosystem. This project was possible thanks to the openness and transparency of the <a href="https://rubygems.org/" target="_blank" rel="nofollow noopener">RubyGems.org</a> team (<a href="https://rubygems.org/pages/data" target="_blank" rel="nofollow noopener">public data</a>) and the availability of the <a href="https://clickhouse.com/blog/announcing-ruby-gem-analytics-powered-by-clickhouse" target="_blank" rel="nofollow noopener">ClickHouse-powered open dataset</a>, combined with the flexibility of the <a href="https://api.github.com/" target="_blank" rel="nofollow noopener">GitHub API</a>, which made it easy to script our way through the analysis.</p>
+
+<h3 id="every-project-is-different">Every project is different</h3>
+
+<p>One thing became very clear: <strong>each gem has different needs</strong>. Some only need an occasional check-up when a new Ruby version is released, some can be merged together to make maintenance easier. And sometimes it’s perfectly fine to say, “this project is done,” as long as we help the community move forward with migration guides and support.</p>
+
+<h3 id="the-one-shared-rule">The one shared rule</h3>
+
+<p>Across all cases, we have detected one universal initial good sign of a healthy gem: <strong>stable CI that runs on all currently supported Ruby versions</strong>. Since Ruby gets a new major release roughly once a year (usually around Christmas), with release candidates available weeks or even months in advance, keeping CI up to date is not a huge effort — but it provides enormous value in ensuring projects are ready for the next Ruby release. This should be part of every maintainer’s basic routine.</p>
+
+<p><ins>First rule of the RubyGems Maintainers Club: <strong>you always keep a stable CI running on all currently supported Rubies</strong>.</ins></p>
+
+<h3 id="whats-next">What’s next</h3>
+
+<p>We plan to continue publishing <strong>We ❤️ Ruby</strong> updates more often. Our aim is to keep shining a light on the state of widely-used community gems, highlight where help is needed, and celebrate improvements when they happen.</p>
+
+<p>If you’d like to help keep the Ruby ecosystem healthy, there are a few ways to support this work:</p>
+
+<ul>
+  <li>
+<strong>Maintainer:</strong> Already maintain open source projects? Fantastic — keep going!
+    <ul>
+      <li>
+<strong>Not a maintainer yet? You can become one!</strong> We’ve sprinkled hints and ideas for improvements throughout this post. Pick one, open a pull request, and see where it takes you. Fair warning: it’s highly addictive.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Corporate level:</strong> If your company relies on RubyGems.org infrastructure, consider sponsoring <a href="https://rubycentral.org/about/" target="_blank" rel="nofollow noopener">Ruby Central</a> (<a href="https://rubycentral.org/corporate-sponsorship/" target="_blank" rel="nofollow noopener">corporate sponsorship info</a>), the non-profit maintaining RubyGems.org, RubyGems, Bundler, and other core projects. We are in close contact with them and fully support their work.</li>
+  <li>
+<strong>Direct support:</strong> You can sponsor RubyElders project directly using <a href="https://github.com/sponsors/RubyElders" target="_blank" rel="nofollow noopener">GitHub Sponsors</a>.</li>
+  <li>
+    <p><strong>Stay connected:</strong> Follow us for updates on</p>
+
+    <ul>
+      <li><a href="https://ruby.social/@rubyelders" target="_blank" rel="nofollow noopener">Mastodon</a></li>
+      <li><a href="https://rubyelders.bsky.social" target="_blank" rel="nofollow noopener">Bluesky</a></li>
+      <li><a href="https://x.com/RubyElders" target="_blank" rel="nofollow noopener">Twitter/X</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>We’re already preparing the next <strong>We ❤️ Ruby</strong> community update — stay tuned!</p>
+
+</article>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="/assets/js/writings.js"></script>
+  
+
+
+</body>

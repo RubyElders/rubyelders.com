@@ -6,10 +6,10 @@
     <span class="avatar-text-group">
       By
       <img
-          id="avatar-photo"
-          src="<%= @writing[:author_avatar_url] %>"
-          />
-          <%= @writing[:author] %> — <%= @writing[:released_at] %> — <%= @writing[:place] %>
+        id="avatar-photo"
+        src="<%= @writing[:author_avatar_url] %>"
+      />
+      <a href="<%= @writing[:author_url] %>" target="_blank"><%= @writing[:author] %></a> — <%= @writing[:released_at] %> — <%= @writing[:place] %>
     </span>
     </p>
   </header>
