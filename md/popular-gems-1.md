@@ -189,8 +189,7 @@ If you’d like to help keep the Ruby ecosystem healthy, there are a few ways to
   * **Not a maintainer yet? You can become one!** We’ve sprinkled hints and ideas for improvements throughout this post. Pick one, open a pull request, and see where it takes you. Fair warning: it’s highly addictive.
 * **Corporate level:** If your company relies on RubyGems.org infrastructure, consider sponsoring [Ruby Central](https://rubycentral.org/about/) ([corporate sponsorship info](https://rubycentral.org/corporate-sponsorship/)), the non-profit maintaining RubyGems.org, RubyGems, Bundler, and other core projects. We are in close contact with them and fully support their work.
 * **Direct support:** You can sponsor RubyElders project directly using [GitHub Sponsors](https://github.com/sponsors/RubyElders).
-* **Stay connected:** Follow us for updates on
-
+* **Stay connected:** Follow us for updates on:
   * [Mastodon](https://ruby.social/@rubyelders)
   * [Bluesky](https://rubyelders.bsky.social)
   * [Twitter/X](https://x.com/RubyElders)
