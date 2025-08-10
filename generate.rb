@@ -62,12 +62,8 @@ writings.each do |w|
 
   # Render the post template with writing and HTML content
   @content = ERB.new(post_template).result(binding)
-
-  # Now inject post content into layout
-  full_html = ERB.new(layout_template).result(binding)
-
   # Outside links to new window
-  full_html = Nokogiri::HTML.fragment(full_html).tap do |doc|
+  @content = Nokogiri::HTML.fragment(@content).tap do |doc|
     doc.css('a').each do |node|
       node['href'] ||= '#'
       # Add attributes to external links only:
@@ -77,6 +73,10 @@ writings.each do |w|
       end
     end
   end.to_html
+
+  # Now inject post content into layout
+  full_html = ERB.new(layout_template).result(binding)
+
   # Write to file
   File.write("writings/#{w[:slug]}.html", full_html)
   puts "Generated writings/#{w[:slug]}.html"
