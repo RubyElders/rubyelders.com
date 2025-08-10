@@ -29,7 +29,7 @@ Here’s the story of what we found and how we helped.
 
 Despite being macOS-specific, we were able to debug and set up CI for it entirely through GitHub Actions, without having a Mac at hand. We submitted a pull request to add the missing CI, and it was accepted and merged the very next day—a rare “happy path” contribution where everything went smoothly.
 
-→ [Adding CI pull request](https://github.com/guard/rb-fsevent/pull/96)
+- [Adding CI pull request](https://github.com/guard/rb-fsevent/pull/96)
 
 ### Maintenance needs note
 
