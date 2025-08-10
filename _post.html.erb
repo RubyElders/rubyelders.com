@@ -3,14 +3,18 @@
     <h1><%= @writing[:title] %></h1>
 
     <p class="post-meta">
-    <span class="avatar-text-group">
-      By
-      <img
-        id="avatar-photo"
-        src="<%= @writing[:author_avatar_url] %>"
-      />
-      <a href="<%= @writing[:author_url] %>" target="_blank"><%= @writing[:author] %></a> — <%= @writing[:released_at] %> — <%= @writing[:place] %>
-    </span>
+      <span class="avatar-text-group">
+        <span class="avatar-name">
+          By
+          <img
+            id="avatar-photo"
+            src="<%= @writing[:author_avatar_url] %>"
+            alt="<%= @writing[:author] %> avatar"
+          />
+          <a href="<%= @writing[:author_url] %>" target="_blank" rel="noopener"> <%= @writing[:author] %> </a>
+        </span>
+        <span class="avatar-meta"> <%= @writing[:released_at] %> — <%= @writing[:place] %></span>
+      </span>
     </p>
   </header>
 
