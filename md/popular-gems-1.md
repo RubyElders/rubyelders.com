@@ -187,7 +187,7 @@ If you’d like to help keep the Ruby ecosystem healthy, there are a few ways to
 
 * **Maintainer:** Already maintain open source projects? Fantastic — keep going!
   * **Not a maintainer yet? You can become one!** We’ve sprinkled hints and ideas for improvements throughout this post. Pick one, open a pull request, and see where it takes you. Fair warning: it’s highly addictive.
-* **Corporate level:** If your company relies on [RubyGems.org](https://rubygems.org) infrastructure, **please consider sponsoring [Ruby Central](https://rubycentral.org/about/)** ([corporate sponsorship info](https://rubycentral.org/corporate-sponsorship/)), the non-profit maintaining [RubyGems.org](https://rubygems.org), [RubyGems](https://guides.rubygems.org), [Bundler](https://bundler.io), and [other core projects](https://rubycentral.org/open-source/). We are in close contact with them and fully support their work.
+* **Corporate level**: If your company relies on [RubyGems.org](https://rubygems.org) infrastructure, **please consider sponsoring [Ruby Central](https://rubycentral.org/about/)**, the non-profit maintaining [RubyGems.org](https://rubygems.org), by joining as a [RubyGems Supporter](https://rubycentral.org/open-source/#/portal/signup) or becoming a [Corporate Sponsor](https://rubycentral.org/corporate-sponsorship/).  We are in close contact with them and fully support their work.
 * **Direct support:** You can sponsor RubyElders project directly using [GitHub Sponsors](https://github.com/sponsors/RubyElders).
 * **Stay connected:** Follow us for updates on:
   * [Mastodon](https://ruby.social/@rubyelders)
