@@ -10,8 +10,8 @@
     "place": "Praha, Žižkov",
     "og": {
       "title": "Wubular: Rubular’s regex spirit, reborn with Ruby + WebAssembly",
-      "description": "Rubular set the standard for regex testing in Ruby. With Ruby 3.2 bringing native WebAssembly support, Wubular takes that idea into the browser — no servers, instant feedback, full privacy. It’s not just a remake, but a glimpse of what Ruby + WASM make possible for future apps.",
-      "image": "/assets/img/writings/wubular_og_image.png"
+      "description": "Rubular set the standard for regex testing in Ruby. With Ruby 3.2 bringing WebAssembly support, Wubular takes that idea into the browser — no servers, instant feedback, full privacy. It’s not just a remake, but a glimpse of what Ruby + WASM make possible for future apps.",
+      "image": "https://rubyelders.com/assets/img/writings/wubular_og_image.png"
     }
   },
   {
