@@ -34,7 +34,8 @@ writings = writings_data.map do |w|
     author: w['author'],
     author_url: w['author_url'],
     author_avatar_url: w['author_avatar_url'],
-    place: w['place']
+    place: w['place'],
+    og: w['og']
   }
 end
 
@@ -46,6 +47,7 @@ post_template = File.read('_post.html.erb')
 # Generate writings index page
 @writings = writings
 @title = "Writings"
+@og = {}
 @content = ERB.new(list_template).result(binding)
 html_output = ERB.new(layout_template).result(binding)
 File.write('writings.html', html_output)
@@ -60,6 +62,7 @@ writings.each do |w|
   @writing = w
   @title = w[:title]
   @content = Kramdown::Document.new(markdown, input: 'GFM').to_html
+  @og = w[:og] || {}
 
   # Render the post template with writing and HTML content
   @content = ERB.new(post_template).result(binding)
