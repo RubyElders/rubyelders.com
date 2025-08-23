@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/writings.css" />
     <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
 <% @og.each_pair do |prop, content| %>
-    <meta property="<%= prop %>" content="<%= content %>" />
+    <meta property="og:<%= prop %>" content="<%= content %>" />
 <% end %>
     <!-- Syntax Highlighting: Prism.js -->
     <link
