@@ -77,7 +77,7 @@
     </p>
   </header>
 
-  <p><em>Ever wished a Ruby app could run entirely in your browser, without ever calling back to a server? That’s the spark behind story of <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener"><strong>Wubular</strong></a> — <a href="https://rubular.com/" target="_blank" rel="nofollow noopener"><strong>Rubular</strong></a> remake, powered by Ruby compiled to <a href="https://webassembly.org/" target="_blank" rel="nofollow noopener">WebAssembly</a> running nativelly in browser.</em></p>
+  <p><em>Ever wished a Ruby app could run entirely in your browser, without ever calling back to a server? That’s what sparked <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener"><strong>Wubular</strong></a> — a <a href="https://rubular.com/" target="_blank" rel="nofollow noopener"><strong>Rubular</strong></a> remake, powered by Ruby compiled to <a href="https://webassembly.org/" target="_blank" rel="nofollow noopener">WebAssembly</a> running natively in the browser.</em></p>
 
 <p>If you’ve been around Ruby, you probably know <a href="https://rubular.com/" target="_blank" rel="nofollow noopener"><strong>Rubular</strong></a> — the de-facto standard tool created by <img src="https://avatars.githubusercontent.com/u/22803?v=4" class="avatar"> <a href="https://github.com/lovitt" target="_blank" rel="nofollow noopener">Michael Lovitt (@lovitt)</a> back in 2007 for quickly composing and testing <a href="https://www.ruby-lang.org/en/" target="_blank" rel="nofollow noopener">Ruby regular expressions</a>. I’ve relied on it countless times, but the app itself now feels a bit outdated — for example, the footer shows it’s still running on an old Ruby. On top of that, Rubular isn’t open source (at least I haven’t been able to find any code published), so the only way I thought I might help was by reaching out to the original author and offering some community support.</p>
 
@@ -96,7 +96,7 @@
 
 <h2 id="rubulars-classic-architecture">Rubular’s classic architecture</h2>
 
-<p>Rubular was a brilliant little invention: a regex box, a test string box, and instant feedback. Behind the curtain, though, it’s a traditional <strong>server–client setup</strong>.</p>
+<p>Rubular was a brilliant little invention: just a regex box, a test string box, and instant feedback. Behind the curtain, though, it’s a traditional <strong>server–client setup</strong>.</p>
 
 <p>The frontend is plain HTML + JavaScript. Each time you type, the JS serializes the form and fires off a <strong>POST</strong> request to the backend:</p>
 
@@ -159,7 +159,7 @@ utf8=✓&amp;regex=ss&amp;options=&amp;test=ss&amp;word_wrap=1&amp;_=...
 
 <p><a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener"><strong>Wubular</strong></a> is a Rubular clone that runs 100% in your browser.</p>
 
-<p>From the user’s perspective, it feels the same: paste a regexp, pick options, type a test string, and see results instantly. But under the hood, everything changed:</p>
+<p>For users, it feels the same: paste a regexp, pick options, type a test string, and see results instantly. But under the hood, everything changed:</p>
 
 <ul>
   <li>The Ruby interpreter is compiled to WebAssembly.</li>
@@ -167,17 +167,17 @@ utf8=✓&amp;regex=ss&amp;options=&amp;test=ss&amp;word_wrap=1&amp;_=...
   <li>The DOM is manipulated directly from Ruby classes that behave like components — mount, unmount, react to events.</li>
 </ul>
 
-<p>There aren’t polished frameworks yet for Ruby-in-the-browser, but Ruby doesn’t need to reinvent the wheel. Using the built-in <code>js</code> library (<code>require "js"</code>), Ruby can talk to native browser APIs like <code>document.querySelector</code> or <code>addEventListener</code>.</p>
+<p>There aren’t polished Ruby-in-the-browser frameworks yet, but Ruby doesn’t need to reinvent the wheel. Using the built-in <code>js</code> library (<code>require "js"</code>), Ruby can talk to native browser APIs like <code>document.querySelector</code> or <code>addEventListener</code>.</p>
 
 <p>It really is this simple, just try it:</p>
 
 <iframe src="https://codesandbox.io/embed/xpjsns?view=split&amp;module=%2Findex.html&amp;editorsize=65&amp;runonclick=1&amp;hidenavigation=1" style="width:100%; height: 350px; border:0; border-radius: 4px; overflow:hidden;" title="ruby-wasm-hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
-<p>Or, a slightly richer one: regex input + text input + a checkbox that updates live:</p>
+<p>Or, a slightly richer one: a regex input, a text input, and a checkbox that updates live:</p>
 
 <iframe src="https://codesandbox.io/embed/nlwj4q?view=split&amp;module=%2Findex.html&amp;editorsize=65&amp;runonclick=1&amp;hidenavigation=1" style="width:100%; height: 800px; border:0; border-radius: 4px; overflow:hidden;" title="ruby-wasm-hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
-<p>That’s literally how the first Wubular prototype came to life.</p>
+<p>That’s exactly how the first Wubular prototype came to life.</p>
 
 <hr>
 
@@ -185,7 +185,7 @@ utf8=✓&amp;regex=ss&amp;options=&amp;test=ss&amp;word_wrap=1&amp;_=...
 
 <p>Wubular is already <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">live</a> and usable — paste a regex, type your string, and see results instantly. But it’s also an experiment in what Ruby + WASM makes possible.</p>
 
-<p>And here’s the kicker: Wubular isn’t just a quick prototype — it’s also fully tested app developed using <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="nofollow noopener">TDD</a>. Like any serious Ruby project, it ships with an automated test suite. The difference? It runs also directly in your browser, using the same tools you’d use locally. In Wubular’s case, that’s good old <a href="https://github.com/minitest/minitest/" target="_blank" rel="nofollow noopener"><strong>Minitest</strong></a>. Open the <a href="https://en.wikipedia.org/wiki/Web_development_tools" target="_blank" rel="nofollow noopener">DevTools console</a> in your browser, append <code>?run_tests</code> to the URL, and watch the results fly by. Full integration test runs complete in milliseconds. Imagine a world where client-side apps boot only after passing their own test suite on client.</p>
+<p>And here’s the kicker: Wubular isn’t just a quick prototype — it’s also a fully tested app, developed with <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="nofollow noopener">TDD</a>. Like any serious Ruby project, it ships with an automated test suite. The difference? It also runs directly in your browser, using the same tools you’d use locally. In Wubular’s case, that’s good old <a href="https://github.com/minitest/minitest/" target="_blank" rel="nofollow noopener"><strong>Minitest</strong></a>. Open the <a href="https://en.wikipedia.org/wiki/Web_development_tools" target="_blank" rel="nofollow noopener">DevTools console</a> in your browser, append <code>?run_tests</code> to the URL, and watch the results fly by. Full integration test runs complete in milliseconds. Imagine if client-side apps booted only after passing their own test suite locally.</p>
 
 <p><strong>PRO TIP: You can combine various Ruby versions with <code>run_tests</code> parameter like <code>?ruby=3.2&amp;run_tests</code>.</strong></p>
 
@@ -198,9 +198,9 @@ utf8=✓&amp;regex=ss&amp;options=&amp;test=ss&amp;word_wrap=1&amp;_=...
   </figcaption>
 </figure>
 
-<p>This is first post of Wubular serie. In the next one, I’ll dig into the internals: how Wubular mounts Ruby components in the DOM, how test-driven development feels when everything runs in the browser, and why the speed feels almost unreal.</p>
+<p>This is the first post in the Wubular series. In the next one, I’ll dig into the internals: how Wubular mounts Ruby components in the DOM, how test-driven development feels when everything runs in the browser, and why the speed feels almost unreal.</p>
 
-<p>In the meantime, go explore: the source is <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">all right there</a> in DevTools → Network, or <a href="https://github.com/RubyElders/wubular" target="_blank" rel="nofollow noopener">up on GitHub</a>. Have fun, try to run the tests, and imagine what else Ruby in the browser might unlock.</p>
+<p>In the meantime, go explore: the source is <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">right there</a> in DevTools → Network, or <a href="https://github.com/RubyElders/wubular" target="_blank" rel="nofollow noopener">up on GitHub</a>. Have fun, try to run the tests, and imagine what else Ruby in the browser might unlock.</p>
 
 <p><strong>Stay connected!</strong> <a href="https://ruby.social/@rubyelders" target="_blank" rel="nofollow noopener">Mastodon</a>, <a href="https://rubyelders.bsky.social" target="_blank" rel="nofollow noopener">Bluesky</a> or <a href="https://x.com/RubyElders" target="_blank" rel="nofollow noopener">Twitter/X</a>.</p>
 
