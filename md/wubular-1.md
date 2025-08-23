@@ -127,4 +127,16 @@ This is the first post in the Wubular series. In the next one, I’ll dig into t
 
 In the meantime, go explore: the source is [right there](https://rubyelders.github.io/wubular) in DevTools → Network, or [up on GitHub](https://github.com/RubyElders/wubular). Have fun, try to run the tests, and imagine what else Ruby in the browser might unlock.
 
+<figure>
+  <picture>
+    <img
+      src="/assets/img/writings/wubular_inspector.png"
+      Alt="Wubular source code including tests in DevTools."
+    >
+  </picture>
+  <figcaption>
+    Wubular source code including tests in DevTools.
+  </figcaption>
+</figure>
+
 **Stay connected!** [Mastodon](https://ruby.social/@rubyelders), [Bluesky](https://rubyelders.bsky.social) or [Twitter/X](https://x.com/RubyElders).
