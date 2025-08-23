@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introducing Wubular: Rubular Reimagined in Ruby+WASM | Ruby Elders</title>
+    <link rel="stylesheet" href="/css/writings.css" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <!-- Syntax Highlighting: Prism.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/writings.html">
+        <svg
+          viewBox="0 0 279.09328 71.770356"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m 236.07491,44.384808 c 0,-0.1 -0.2,-0.3 -0.4,-0.4 -1.2,-0.5 -3.7,-0.9 -5.7,-0.9 -3.8,0 -6.5,2.3 -6.5,5.4 0,3 2.2,4.9 4.7,5.9 2,0.8 5.6,1.6 5.6,4.2 0,1.4 -1.6,2.8 -3.2,2.8 -2.2,0 -4.4,-1.8 -5.6,-4.6 -0.4,-1 -0.6,-1.2 -0.9,-1.2 -0.3,0 -0.4,0.3 -0.4,0.7 l 0.3,3.9 c 0,0.7 0.2,1 0.9,1.2 1.9,0.4 3.7,1 5.4,1 4,0 7.5,-3 7.5,-6.5 0,-3.7 -3.5,-5.1 -6.3,-6.3 -2.8,-1.2 -4,-2.1 -4,-3.3 0,-1.3 1.5,-2.4 3.3,-2.4 2,0 4.2,1.8 4.9,4 0.3,0.8 0.4,0.9 0.8,0.9 0.3,0 0.4,-0.1 0.4,-0.4 v -0.3 z"
+          />
+          <path
+            d="m 211.77491,47.384808 v -3.3 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.7,0.3 -0.8,0.3 -1.3,0.5 -2.9,1.2 -5.7,2 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 7.5 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -1.1,0 -2,-0.7 -2,-2.7 v -8.2 c 1.2,-1.7 1.8,-2.3 2.6,-2.3 0.3,0 0.7,0.2 1.2,0.4 0.9,0.4 1.6,0.6 2.1,0.6 1.5,0 2.6,-1 2.6,-2.4 0,-1.3 -1.1,-2.3 -2.6,-2.3 -1.7,-0.2 -4,1.6 -5.8,3.8"
+          />
+          <path
+            d="m 200.57491,56.284808 c -0.1,0 -0.2,0.1 -0.3,0.2 -1.5,2 -3.9,3.2 -6,3.2 -3.3,0 -5.9,-3.2 -5.9,-7.4 0,-0.1 0,-0.3 0,-0.6 h 8.2 2.9 c 1.1,0 1.5,-0.5 1.5,-1.3 0,-0.3 0,-0.7 -0.2,-1.2 -1.2,-3.4 -4.4,-5.8 -8.3,-5.8 -5.2,0 -9.2,4.4 -9.2,10 0,5 4,9.4 8.6,9.4 3.9,0 7.2,-2.3 9,-5.3 0.2,-0.3 0.3,-0.6 0.3,-0.9 -0.1,-0.1 -0.3,-0.3 -0.6,-0.3 z m -8.4,-11.7 c 2.5,0.1 3.9,1.9 3.9,4.9 0,0.3 -0.1,0.7 -0.9,0.7 h -2.8 -3.9 c 0.3,-3.7 1.5,-5.6 3.7,-5.6 z"
+          />
+          <path
+            d="m 179.87491,60.784808 c -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -25.1 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 6.9 c -1.4,-0.6 -2.6,-1 -3.9,-1 -6.1,0 -9.8,4 -9.8,10.4 0,5.3 3.5,9.2 8.3,9.2 1.8,0 4.4,-1 5.5,-2 v 1.7 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.4,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c -0.1,-0.2 -0.2,-0.2 -0.3,-0.3 z m -6.9,-2.1 c -1,1.4 -1.6,1.8 -3,1.8 -3.6,0 -5.9,-3.3 -5.9,-8.3 0,-4.7 1.8,-7.8 4.6,-7.8 2.2,0 3.6,1.4 4.2,3.7 z"
+          />
+          <path
+            d="m 153.37491,32.484808 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 20.2 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.5 c -1.1,0 -2,-0.7 -2,-2.7 z"
+          />
+          <path
+            d="m 123.27491,47.484808 h 6.4 c 3,0 4.9,2.8 4.9,5.2 v 0.6 c 0,0.2 0,0.2 0.2,0.2 h 1.1 c 0.1,0 0.2,0 0.2,-0.2 v -13.5 c 0,-0.2 0,-0.2 -0.2,-0.2 h -1.1 c -0.2,0 -0.2,0 -0.2,0.2 v 0.6 c 0,2.4 -1.9,5.2 -4.9,5.2 h -6.4 v -8.2 c 0,-3.6 0.3,-4.2 4.6,-4.2 4.5,0 9.1,1.1 11.7,4.7 0.8,1.1 1.3,1.7 1.8,1.7 0.3,0 0.4,-0.2 0.4,-0.6 0,-0.2 -0.1,-0.6 -0.3,-1 l -2.5,-5.7 c -0.3,-0.6 -0.3,-0.6 -1.1,-0.6 h -24.3 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 25 c 0.6,0 0.7,-0.2 0.9,-0.6 l 2,-6.4 c 0.2,-0.5 0.2,-0.9 0.2,-1.1 0,-0.3 -0.1,-0.6 -0.3,-0.6 -0.5,0 -1,0.8 -2,2.2 -2.7,3.9 -4.6,4.9 -11.5,4.9 -3.3,0 -4.6,-0.5 -4.6,-1.6 z"
+          />
+          <path
+            d="m 91.2,62.77035 -1.3,2.700008 c -0.3,0.9 -1.1,1.6 -2.2,1.6 h -0.4 c -2.4,0 -3.6,0.9 -3.6,2.6 0,1.2 1,2.1 2.3,2.1 1.8,0 3.1,-1.2 4.5,-4.3 L 99.000004,48.87035 c 1.099996,-2.5 2.299996,-3.2 3.499996,-3.3 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.100004,0.1 1.500004,0.5 1.500004,1.3 0,0.4 -0.1,1 -0.3,1.3 l -3.900004,8.5 -4,-9.1 c -0.3,-0.5 -0.3,-0.9 -0.3,-1.1 0,-0.6 0.6,-0.8 1.6,-0.8 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 H 81.8 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.3,0 1.9,0.6 2.5,2 z"
+          />
+          <path
+            d="m 70.7,43.07035 c -2.3,0 -4.4,1.1 -6,2.4 v -13 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 25.1 l 0.7,-0.1 1.7,-1.6 0.5,-0.3 c 2.6,1.4 4.2,1.9 6.2,1.9 5.2,0 9.4,-4.6 9.4,-10.2 0,-5.4 -3.3,-9.3 -7.8,-9.3 z m -1.5,18.3 c -0.9,0 -2,-0.4 -2.8,-1 -1.4,-1.1 -1.6,-1.6 -1.6,-4 v -9.6 c 1.2,-0.9 1.7,-1.1 3,-1.1 3.7,0 6.3,3.5 6.3,8.2 0,4.2 -2.1,7.5 -4.9,7.5 z"
+          />
+          <path
+            d="m 42,62.47035 c 2.5,0 4.4,-0.7 6.2,-2.9 v 2.4 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.3,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c 0,-0.1 -0.1,-0.2 -0.2,-0.2 -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -12.7 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.3 c -1.5,2.3 -2.6,3.3 -4.3,3.3 -1.7,0 -3.1,-1.5 -3.1,-3.3 v -13.3 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.2 c -0.1,3.1 2.5,5.1 5.9,5.1"
+          />
+          <path
+            d="m 31.2,60.47035 h -0.8 c -1.3,0 -2.5,-0.5 -3.3,-1.7 -0.9,-1.3 -1.3,-2.7 -3,-6.2 -1.5,-2.9 -2.4,-4.5 -3.9,-5.9 -0.2,-0.2 -0.3,-0.3 -0.3,-0.4 0,-0.1 0.1,-0.2 0.4,-0.2 4.2,-1 6.4,-3.3 6.4,-6.7 0,-4.8 -4.6,-7.7 -12.1,-7.7 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 13.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -2.4,0 -3.2999999,-0.6 -3.2999999,-3.6 v -9.8 H 14 c 1.1,0.8 1.6,1.5 2.8,3.8 1.5,2.9 3.1,6.3 4.9,10.8 0.1,0.2 0.2,0.3 0.5,0.3 h 9 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.1 0,-0.2 -0.2,-0.2 z m -19.1,-14.6 c -0.5,0 -1.2,0 -2.1999999,-0.1 v -9.6 c 0,-2.9 0.6999999,-3.4 3.1999999,-3.4 5.3,0 7.9,2 7.9,5.9 0.1,4.4 -3.4,7.2 -8.9,7.2 z"
+          />
+          <g id="hat">
+            <path
+              d="m 239.54646,29.219694 c 2.4,1.6 4.3,2.8 6.3,3.9 0.3,0.2 0.6,0.3 0.9,0.5 5.4,3.1 10.3,5.5 15.1,7.4 1.7,0.7 3.4,1.3 4.9,1.8 0.9,-2.5 2.3,-5.8 4.2,-9.1 2.9,-5 6.4,-9.1 7.9,-10.7 0.4,-0.4 0.3,-1 -0.2,-1.2 l -37.7,-21.7 c -0.5,-0.3 -1,0 -1.2,0.5 -0.6,2.1 -2.4,7.2 -5.3,12.2 -1.9,3.3 -4.1,6.1 -5.8,8.2 1.2,1.1 2.6,2.2 4,3.3 2.1,1.6 4.5,3.4 6.9,4.9 z"
+            />
+            <path
+              d="m 275.04646,48.019694 c -5.1,0.5 -10.3,-0.3 -15.3,-1.7 -5.8,-1.6 -11.3,-4 -16.4,-7 -5.1,-3 -10,-6.6 -14.3,-10.8 -3.6,-3.6 -7,-7.7 -9.1,-12.4 -0.2,-0.3 0.2,-0.6 0.5,-0.5 0,0 0.1,0 0.1,0.1 3.3,3.8 6.9,7.1 10.8,10.1 2.3,1.7 4.5,3.4 6.9,5 2.1,1.4 4.2,2.8 6.4,4 0.3,0.2 0.6,0.3 0.9,0.5 4.9,2.8 10,5.4 15.3,7.5 4.6,1.8 9.2,3.4 14.2,4.3 h 0.1 c 0.3,0.4 0.3,0.9 -0.1,0.9 z"
+            />
+          </g>
+        </svg>
+      </a>
+    </header>
+
+    <article>
+  <header>
+    <h1>Introducing Wubular: Rubular Reimagined in Ruby+WASM</h1>
+
+    <p class="post-meta">
+      <span class="avatar-text-group">
+        <span class="avatar-name">
+          By
+          <img id="avatar-photo" src="https://avatars.githubusercontent.com/u/193936?v=4" alt="simi avatar">
+          <a href="https://github.com/simi" target="_blank" rel="nofollow noopener"> simi </a>
+        </span>
+        <span class="avatar-meta"> August 20, 2025 — Praha, Žižkov</span>
+      </span>
+    </p>
+  </header>
+
+  <p><em>Ever wished a Ruby app could run entirely in your browser, without ever calling back to a server? That’s the spark behind story of <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener"><strong>Wubular</strong></a> — <a href="https://rubular.com/" target="_blank" rel="nofollow noopener"><strong>Rubular</strong></a> remake, powered by Ruby compiled to <a href="https://webassembly.org/" target="_blank" rel="nofollow noopener">WebAssembly</a> running nativelly in browser.</em></p>
+
+<p>If you’ve been around Ruby, you probably know <a href="https://rubular.com/" target="_blank" rel="nofollow noopener"><strong>Rubular</strong></a> — the de-facto standard tool created by <img src="https://avatars.githubusercontent.com/u/22803?v=4" class="avatar"> <a href="https://github.com/lovitt" target="_blank" rel="nofollow noopener">Michael Lovitt (@lovitt)</a> back in 2007 for quickly composing and testing <a href="https://www.ruby-lang.org/en/" target="_blank" rel="nofollow noopener">Ruby regular expressions</a>. I’ve relied on it countless times, but the app itself now feels a bit outdated — for example, the footer shows it’s still running on an old Ruby. On top of that, Rubular isn’t open source (at least I haven’t been able to find any code published), so the only way I thought I might help was by reaching out to the original author and offering some community support.</p>
+
+<figure>
+  <picture>
+    <img src="/assets/img/writings/wubular_rubular.png" alt="Original Rubular webapp">
+  </picture>
+  <figcaption>
+    Original Rubular website preview.
+  </figcaption>
+</figure>
+
+<p>But then it hit me: why not just run it directly in the browser? Since Ruby 3.2, the language has had native WebAssembly support. That doesn’t just make Rubular-style apps possible entirely client-side — it opens up wild ideas like <strong>switching Ruby versions right in the browser</strong>. (And really — can you imagine the nightmare of juggling multi-Ruby deployments on a server?) With WebAssembly, there are no server round-trips, no JS framework sprawl — just Ruby, running natively in your browser.</p>
+
+<hr>
+
+<h2 id="rubulars-classic-architecture">Rubular’s classic architecture</h2>
+
+<p>Rubular was a brilliant little invention: a regex box, a test string box, and instant feedback. Behind the curtain, though, it’s a traditional <strong>server–client setup</strong>.</p>
+
+<p>The frontend is plain HTML + JavaScript. Each time you type, the JS serializes the form and fires off a <strong>POST</strong> request to the backend:</p>
+
+<pre><code class="language-http">POST /regex/do_test?message_id=123
+Content-Type: application/x-www-form-urlencoded
+
+utf8=✓&amp;regex=ss&amp;options=&amp;test=ss&amp;word_wrap=1&amp;_=...
+</code></pre>
+
+<p>The Ruby server evaluates the regex and responds with an HTML snippet:</p>
+
+<pre><code class="language-javascript">Rubular.handleParseResult({
+  "message_id": 1,
+  "error_message": null,
+  "retry": null,
+  "html": "&lt;div class='match_result'&gt;…&lt;/div&gt;"
+});
+</code></pre>
+
+<p>The browser then updates the results in place. Classic Ajax magic — spinners, retries, even a “permalink” endpoint.</p>
+
+<p>It worked great in its day, but it comes with obvious costs:</p>
+
+<ul>
+  <li>
+<strong>Server load</strong>: every keystroke means backend work.</li>
+  <li>
+<strong>Latency</strong>: results lag behind your typing.</li>
+  <li>
+<strong>Maintenance</strong>: you need a running Ruby backend <em>just to check regexes</em>.</li>
+</ul>
+
+<hr>
+
+<h2 id="ruby-in-the-browser">Ruby in the Browser</h2>
+
+<p>Now enter <strong><a href="https://webassembly.org/" target="_blank" rel="nofollow noopener">WebAssembly (WASM)</a></strong>.</p>
+
+<p>Since <a href="https://www.ruby-lang.org/en/news/2022/12/25/ruby-3-2-0-released/" target="_blank" rel="nofollow noopener">Ruby 3.2</a>, MRI itself <a href="https://github.com/ruby/ruby/pull/5407" target="_blank" rel="nofollow noopener">can be compiled</a> — thanks to <img src="https://avatars.githubusercontent.com/u/11702759?v=4" class="avatar"> <a href="https://github.com/kateinoigakukun" target="_blank" rel="nofollow noopener">Yuta Saito (@kateinoigakukun)</a> — to run in WASM environments. WASM is essentially <em>assembly for the web</em>: safe, fast, portable bytecode that browsers (and other runtimes) can execute. Combine it with <a href="https://wasi.dev/" target="_blank" rel="nofollow noopener"><strong>WASI</strong></a> (WebAssembly System Interface) and you get access to basic system features like files, time, and randomness — enough to run full Ruby apps.</p>
+
+<p>That flips the old Rubular model upside down: regex evaluation (and any Ruby code) can now run <strong>entirely client-side</strong>.</p>
+
+<ul>
+  <li>
+<strong>No servers</strong>: nothing to deploy or scale.</li>
+  <li>
+<strong>Instant feedback</strong>: results as you type, with zero network round-trips.</li>
+  <li>
+<strong>Privacy</strong>: test strings never leave your browser.</li>
+  <li>
+<strong>Zero build</strong>: just static HTML + Ruby files.</li>
+</ul>
+
+<p>It’s still the same Ruby you know — now just living inside a browser tab.</p>
+
+<hr>
+
+<h2 id="meet-wubular">Meet <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">Wubular</a>
+</h2>
+
+<p><a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener"><strong>Wubular</strong></a> is a Rubular clone that runs 100% in your browser.</p>
+
+<p>From the user’s perspective, it feels the same: paste a regexp, pick options, type a test string, and see results instantly. But under the hood, everything changed:</p>
+
+<ul>
+  <li>The Ruby interpreter is compiled to WebAssembly.</li>
+  <li>App logic is plain <code>.rb</code> files, loaded with <code>&lt;script type="text/ruby" src="app.rb"&gt;</code>.</li>
+  <li>The DOM is manipulated directly from Ruby classes that behave like components — mount, unmount, react to events.</li>
+</ul>
+
+<p>There aren’t polished frameworks yet for Ruby-in-the-browser, but Ruby doesn’t need to reinvent the wheel. Using the built-in <code>js</code> library (<code>require "js"</code>), Ruby can talk to native browser APIs like <code>document.querySelector</code> or <code>addEventListener</code>.</p>
+
+<p>It really is this simple, just try it:</p>
+
+<iframe src="https://codesandbox.io/embed/xpjsns?view=split&amp;module=%2Findex.html&amp;editorsize=65&amp;runonclick=1&amp;hidenavigation=1" style="width:100%; height: 350px; border:0; border-radius: 4px; overflow:hidden;" title="ruby-wasm-hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+<p>Or, a slightly richer one: regex input + text input + a checkbox that updates live:</p>
+
+<iframe src="https://codesandbox.io/embed/nlwj4q?view=split&amp;module=%2Findex.html&amp;editorsize=65&amp;runonclick=1&amp;hidenavigation=1" style="width:100%; height: 800px; border:0; border-radius: 4px; overflow:hidden;" title="ruby-wasm-hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+
+<p>That’s literally how the first Wubular prototype came to life.</p>
+
+<hr>
+
+<h2 id="ruby-wasm-and-the-future-of-browser-apps">Ruby, WASM, and the Future of Browser Apps</h2>
+
+<p>Wubular is already <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">live</a> and usable — paste a regex, type your string, and see results instantly. But it’s also an experiment in what Ruby + WASM makes possible.</p>
+
+<p>And here’s the kicker: Wubular isn’t just a quick prototype — it’s also fully tested app developed using <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="nofollow noopener">TDD</a>. Like any serious Ruby project, it ships with an automated test suite. The difference? It runs also directly in your browser, using the same tools you’d use locally. In Wubular’s case, that’s good old <a href="https://github.com/minitest/minitest/" target="_blank" rel="nofollow noopener"><strong>Minitest</strong></a>. Open the <a href="https://en.wikipedia.org/wiki/Web_development_tools" target="_blank" rel="nofollow noopener">DevTools console</a> in your browser, append <code>?run_tests</code> to the URL, and watch the results fly by. Full integration test runs complete in milliseconds. Imagine a world where client-side apps boot only after passing their own test suite on client.</p>
+
+<p><strong>PRO TIP: You can combine various Ruby versions with <code>run_tests</code> parameter like <code>?ruby=3.2&amp;run_tests</code>.</strong></p>
+
+<figure>
+  <picture>
+    <img src="/assets/img/writings/wubular_minitest_browser.png" alt="Wubular test suite running in the browser">
+  </picture>
+  <figcaption>
+    Wubular’s test suite running directly in the browser with Minitest.
+  </figcaption>
+</figure>
+
+<p>This is first post of Wubular serie. In the next one, I’ll dig into the internals: how Wubular mounts Ruby components in the DOM, how test-driven development feels when everything runs in the browser, and why the speed feels almost unreal.</p>
+
+<p>In the meantime, go explore: the source is <a href="https://rubyelders.github.io/wubular" target="_blank" rel="nofollow noopener">all right there</a> in DevTools → Network, or <a href="https://github.com/RubyElders/wubular" target="_blank" rel="nofollow noopener">up on GitHub</a>. Have fun, try to run the tests, and imagine what else Ruby in the browser might unlock.</p>
+
+<p><strong>Stay connected!</strong> <a href="https://ruby.social/@rubyelders" target="_blank" rel="nofollow noopener">Mastodon</a>, <a href="https://rubyelders.bsky.social" target="_blank" rel="nofollow noopener">Bluesky</a> or <a href="https://x.com/RubyElders" target="_blank" rel="nofollow noopener">Twitter/X</a>.</p>
+
+</article>
+
+<hr class="end">
+
+<center><a href="/writings.html">Back to writings list.</a></center>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="/assets/js/writings.js"></script>
+  </body>
+</html>
+
