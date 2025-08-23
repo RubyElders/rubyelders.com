@@ -6,6 +6,7 @@ gemfile(true) do
   gem "json"
   gem "erb"
   gem "kramdown"
+  gem "kramdown-parser-gfm"
   gem "nokogiri"
 end
 
@@ -58,7 +59,7 @@ writings.each do |w|
   markdown = File.read(w[:source])
   @writing = w
   @title = w[:title]
-  @content = Kramdown::Document.new(markdown).to_html
+  @content = Kramdown::Document.new(markdown, input: 'GFM').to_html
 
   # Render the post template with writing and HTML content
   @content = ERB.new(post_template).result(binding)

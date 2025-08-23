@@ -1,131 +1,130 @@
-*Ever wished a Ruby app could run entirely in your browser, without talking to a remote server? That’s the spark behind **Wubular** — Rubular reborn, powered by Ruby compiled to WebAssembly.*
+*Ever wished a Ruby app could run entirely in your browser, without ever calling back to a server? That’s the spark behind story of [**Wubular**](https://rubyelders.github.io/wubular) — [**Rubular**](https://rubular.com/) remake, powered by Ruby compiled to [WebAssembly](https://webassembly.org/) running nativelly in browser.*
 
-If you’ve been around Ruby for a while, you probably know [**Rubular**](https://rubular.com/) — my long-time favorite little tool for quickly composing and testing regular expressions. I’ve used it countless times, but it’s starting to show its age: according to the app’s footer, it still runs on an older Ruby. At one point I even considered stepping in to help keep it maintained and upgraded…
+If you’ve been around Ruby, you probably know [**Rubular**](https://rubular.com/) — the de-facto standard tool created by <img src="https://avatars.githubusercontent.com/u/22803?v=4" class="avatar"> [Michael Lovitt (@lovitt)](https://github.com/lovitt) back in 2007 for quickly composing and testing [Ruby regular expressions](https://www.ruby-lang.org/en/). I’ve relied on it countless times, but the app itself now feels a bit outdated — for example, the footer shows it’s still running on an old Ruby. On top of that, Rubular isn’t open source (at least I haven’t been able to find any code published), so the only way I thought I might help was by reaching out to the original author and offering some community support.
 
-But then it hit me: why not just run it directly in the browser? Since Ruby 3.2, the language has had native WebAssembly support. That not only makes Rubular-style apps possible entirely client-side, it also opens up fun extras like **dynamic Ruby version selection right in the browser**. (And really — can you imagine the headache of trying to support multiple Rubies on the server, juggling deployments and interpreters?) With Wubular, there are no server round-trips and no JS framework sprawl — just Ruby, running natively in your browser.
+<figure>
+  <picture>
+    <img 
+      src="/assets/img/writings/wubular_rubular.png" 
+      alt="Original Rubular webapp" 
+    >
+  </picture>
+  <figcaption>
+    Original Rubular website preview.
+  </figcaption>
+</figure>
+
+But then it hit me: why not just run it directly in the browser? Since Ruby 3.2, the language has had native WebAssembly support. That doesn’t just make Rubular-style apps possible entirely client-side — it opens up wild ideas like **switching Ruby versions right in the browser**. (And really — can you imagine the nightmare of juggling multi-Ruby deployments on a server?) With WebAssembly, there are no server round-trips, no JS framework sprawl — just Ruby, running natively in your browser.
 
 ---
 
 ## Rubular’s classic architecture
 
-Rubular has always been a simple and brilliant idea: a textbox for your regex, a textbox for your test string, and instant feedback. Under the hood, though, it’s a pretty old-school **server–client app**.
+Rubular was a brilliant little invention: a regex box, a test string box, and instant feedback. Behind the curtain, though, it’s a traditional **server–client setup**.
 
-The frontend is plain HTML + JavaScript. Every time you type, the JS layer serializes the form and fires off a **POST** request to the server:
+The frontend is plain HTML + JavaScript. Each time you type, the JS serializes the form and fires off a **POST** request to the backend:
 
-~~~ javascript
+```http
 POST /regex/do_test?message_id=123
 Content-Type: application/x-www-form-urlencoded
 
 utf8=✓&regex=ss&options=&test=ss&word_wrap=1&_=...
-~~~
+```
 
-The Ruby backend receives that payload, runs the regex against the test string, and responds with an HTML snippet:
+The Ruby server evaluates the regex and responds with an HTML snippet:
 
-~~~ javascript
+```javascript
 Rubular.handleParseResult({
-    "message_id": 1,
-    "error_message": null,
-    "retry": null,
-    "html": "  \u003cdiv class=\"match_result\"\u003e\n    \u003cspan class=\"result_label\"\u003eMatch result:\u003c/span\u003e\n    \u003cdiv id=\"match_string\" class=\"\"\u003e\u003cspan id=\"match_string_inner\"\u003e\u003cspan class=\"match\"\u003ejj\u003c/span\u003e\u003c/span\u003e\u003c/div\u003e\n  \u003c/div\u003e\n"
+  "message_id": 1,
+  "error_message": null,
+  "retry": null,
+  "html": "<div class='match_result'>…</div>"
 });
-~~~
+```
 
-The JS then updates the `<div id="result">` in place. A bit of Ajax-era magic: spinners, retries, even a “make permalink” endpoint.
+The browser then updates the results in place. Classic Ajax magic — spinners, retries, even a “permalink” endpoint.
 
-It worked great in its time — but it comes with obvious downsides:
+It worked great in its day, but it comes with obvious costs:
 
-* **Server load**: every keystroke means a round-trip to the backend.
-* **Latency**: regex results lag behind your typing.
-* **Maintenance**: the server must stay up, patched, and running a Ruby interpreter just to evaluate regexes.
+* **Server load**: every keystroke means backend work.
+* **Latency**: results lag behind your typing.
+* **Maintenance**: you need a running Ruby backend *just to check regexes*.
 
 ---
 
 ## Ruby in the Browser
 
-Enter the **WebAssembly (WASM)** era!
+Now enter **[WebAssembly (WASM)](https://webassembly.org/)**.
 
-Since Ruby 3.2, the official interpreter can be compiled to run inside a WASM environment. WASM is the “assembly for the web” — a safe, fast, portable bytecode that browsers (and other runtimes) can execute. Pair it with **WASI** (WebAssembly System Interface) and you get access to things like files, clocks, and randomness, making it possible to run real-world Ruby apps in the browser.
+Since [Ruby 3.2](https://www.ruby-lang.org/en/news/2022/12/25/ruby-3-2-0-released/), MRI itself [can be compiled](https://github.com/ruby/ruby/pull/5407) — thanks to <img src="https://avatars.githubusercontent.com/u/11702759?v=4" class="avatar"> [Yuta Saito (@kateinoigakukun)](https://github.com/kateinoigakukun) — to run in WASM environments. WASM is essentially *assembly for the web*: safe, fast, portable bytecode that browsers (and other runtimes) can execute. Combine it with [**WASI**](https://wasi.dev/) (WebAssembly System Interface) and you get access to basic system features like files, time, and randomness — enough to run full Ruby apps.
 
-That flips the old Rubular model on its head. Regex evaluation (and any Ruby code) can now happen **entirely client-side**. The benefits are huge:
+That flips the old Rubular model upside down: regex evaluation (and any Ruby code) can now run **entirely client-side**.
 
-* **No server**: nothing to deploy, patch, or scale.
-* **Instant feedback**: results show up as you type, with zero network latency.
-* **Privacy**: your test strings never leave your browser.
-* **Zero build**: you only need a static HTML page and your Ruby files.
+* **No servers**: nothing to deploy or scale.
+* **Instant feedback**: results as you type, with zero network round-trips.
+* **Privacy**: test strings never leave your browser.
+* **Zero build**: just static HTML + Ruby files.
 
-It’s still the same MRI Ruby under the hood — only now it runs right inside your browser tab.
-
----
-
-## Meet Wubular
-
-Enter **Wubular** — a Rubular clone that runs entirely in your browser.
-
-It works just like the original: type a regexp, set your options, type a test string, and instantly see the result. The difference is, there’s no backend doing the work anymore. The Ruby interpreter itself is compiled to WebAssembly, and the app logic lives in plain `.rb` files. Those files are loaded into the browser via `<script type="text/ruby" src="app.rb">` — yes, the source code you see is really Ruby.
-
-What’s even more interesting is *how* it works: the DOM is manipulated directly from Ruby. Each part of the UI is wrapped in a Ruby class that behaves like a component — it can be mounted and later unmounted. It’s just the beginning of a component model in Ruby for the browser. There aren’t any polished frameworks yet for handling events, bindings, or DOM updates — but Ruby doesn’t need to reinvent the wheel. Using the built-in `js` library (`require "js"`), Ruby code can talk directly to native JavaScript APIs like `document.querySelector` or `addEventListener`.
-
-And yes — it’s this simple:
-
-~~~ html
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/@ruby/3.4-wasm-wasi@latest/dist/browser.script.iife.js"></script>
-
-  <script type="text/ruby">
-    require "js"
-    document = JS.global[:document]
-    document.querySelector("body")[:innerHTML] = "Hello from #{RUBY_DESCRIPTION}!"
-  </script>
-</body>
-~~~
-
-Load Ruby, add a `<script type="text/ruby">`, `require "js"`, and you’re updating the DOM straight from Ruby.
-
-Here’s a slightly richer example — two inputs and a checkbox. Whenever you type, Ruby checks if the regex matches the text:
-
-~~~ html
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/@ruby/3.4-wasm-wasi@latest/dist/browser.script.iife.js"></script>
-
-  <input id="regex" placeholder="Regex (e.g. cat)" />
-  <input id="text" placeholder="Text (e.g. my cat)" />
-  <label>
-    Match?
-    <input type="checkbox" id="result" disabled />
-  </label>
-
-  <script type="text/ruby">
-    require "js"
-    doc = JS.global[:document]
-
-    regex_input = doc.getElementById("regex")
-    text_input  = doc.getElementById("text")
-    result_box  = doc.getElementById("result")
-
-    handler = proc do |_|
-      begin
-        re = Regexp.new(regex_input[:value].to_s)
-        text = text_input[:value].to_s
-        result_box[:checked] = !re.match(text).nil?
-      rescue RegexpError
-        result_box[:checked] = false
-      end
-    end
-
-    regex_input.addEventListener("input", handler.to_js)
-    text_input.addEventListener("input", handler.to_js)
-  </script>
-</body>
-~~~
-
-That’s it: two inputs, one checkbox, and a handful of Ruby lines including stdlib running in your browser — no JS required. This is exactly how initial prototype of Wubular was born.
+It’s still the same Ruby you know — now just living inside a browser tab.
 
 ---
 
-## 🚀 Ruby, WASM, and the Future of Browser Apps
+## Meet [Wubular](https://rubyelders.github.io/wubular)
 
-This was just the introduction. Wubular is already usable today — paste a regex, type your test string, and see the result instantly — but it’s also a living experiment. You can freely explore its code: all the Ruby source files are right there in the browser (just pop open DevTools → Network), or head to GitHub. Fun fact: the whole prototype started life on CodeSandbox.io.
+[**Wubular**](https://rubyelders.github.io/wubular) is a Rubular clone that runs 100% in your browser.
 
-And here’s the kicker: Wubular isn’t just a toy demo — it’s fully tested. Like any healthy Ruby app, it ships with an automated test suite, but here it runs with native Ruby tools. In Wubular’s case, that means good old Minitest, running right inside your browser. Just open the browser console, append `?run_test` to the URL, and watch. The speed of integration testing is wild — full runs complete in mere milliseconds. Imagine a future where web apps verify themselves with their own Ruby test suite before even starting up on client side.
+From the user’s perspective, it feels the same: paste a regexp, pick options, type a test string, and see results instantly. But under the hood, everything changed:
 
-So is this where web apps are heading? Maybe. For now, enjoy exploring Wubular, poke at the source, and try running tests in your own browser. The next post will dive deeper into its internals: component-based Ruby in the browser, test-driven development in a new Ruby browser runtime, and why the speed feels almost unreal.
+* The Ruby interpreter is compiled to WebAssembly.
+* App logic is plain `.rb` files, loaded with `<script type="text/ruby" src="app.rb">`.
+* The DOM is manipulated directly from Ruby classes that behave like components — mount, unmount, react to events.
+
+There aren’t polished frameworks yet for Ruby-in-the-browser, but Ruby doesn’t need to reinvent the wheel. Using the built-in `js` library (`require "js"`), Ruby can talk to native browser APIs like `document.querySelector` or `addEventListener`.
+
+It really is this simple, just try it:
+
+<iframe src="https://codesandbox.io/embed/xpjsns?view=split&module=%2Findex.html&editorsize=65&runonclick=1&hidenavigation=1"
+     style="width:100%; height: 350px; border:0; border-radius: 4px; overflow:hidden;"
+     title="ruby-wasm-hello-world"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
+Or, a slightly richer one: regex input + text input + a checkbox that updates live:
+
+<iframe src="https://codesandbox.io/embed/nlwj4q?view=split&module=%2Findex.html&editorsize=65&runonclick=1&hidenavigation=1"
+     style="width:100%; height: 800px; border:0; border-radius: 4px; overflow:hidden;"
+     title="ruby-wasm-hello-world"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
+That’s literally how the first Wubular prototype came to life.
+
+---
+
+## Ruby, WASM, and the Future of Browser Apps
+
+Wubular is already [live](https://rubyelders.github.io/wubular) and usable — paste a regex, type your string, and see results instantly. But it’s also an experiment in what Ruby + WASM makes possible.
+
+And here’s the kicker: Wubular isn’t just a quick prototype — it’s also fully tested app developed using [TDD](https://en.wikipedia.org/wiki/Test-driven_development). Like any serious Ruby project, it ships with an automated test suite. The difference? It runs also directly in your browser, using the same tools you’d use locally. In Wubular’s case, that’s good old [**Minitest**](https://github.com/minitest/minitest/). Open the [DevTools console](https://en.wikipedia.org/wiki/Web_development_tools) in your browser, append `?run_tests` to the URL, and watch the results fly by. Full integration test runs complete in milliseconds. Imagine a world where client-side apps boot only after passing their own test suite on client.
+
+**PRO TIP: You can combine various Ruby versions with `run_tests` parameter like `?ruby=3.2&run_tests`.**
+
+<figure>
+  <picture>
+    <img 
+      src="/assets/img/writings/wubular_minitest_browser.png" 
+      alt="Wubular test suite running in the browser" 
+    >
+  </picture>
+  <figcaption>
+    Wubular’s test suite running directly in the browser with Minitest.
+  </figcaption>
+</figure>
+
+This is first post of Wubular serie. In the next one, I’ll dig into the internals: how Wubular mounts Ruby components in the DOM, how test-driven development feels when everything runs in the browser, and why the speed feels almost unreal.
+
+In the meantime, go explore: the source is [all right there](https://rubyelders.github.io/wubular) in DevTools → Network, or [up on GitHub](https://github.com/RubyElders/wubular). Have fun, try to run the tests, and imagine what else Ruby in the browser might unlock.
+
+**Stay connected!** [Mastodon](https://ruby.social/@rubyelders), [Bluesky](https://rubyelders.bsky.social) or [Twitter/X](https://x.com/RubyElders).

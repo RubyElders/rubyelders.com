@@ -287,3 +287,13 @@ ul {
 ul li::marker {
   content: "→ ";
 }
+
+figure {
+  text-align: center;
+}
+
+figure picture img {
+  width: 40rem;
+  height: auto;
+  max-width: 100%;
+}
