@@ -1,5 +1,20 @@
 [
   {
+    "source": "md/ruby-butler-1.md",
+    "title": "Ruby Butler: Time to Rethink RubyGems and Bundler",
+    "published_at": "19.10.2025",
+    "slug": "2025-10-ruby-butler-1",
+    "author": "simi",
+    "author_avatar_url": "https://avatars.githubusercontent.com/u/193936?v=4",
+    "author_url": "https://github.com/simi",
+    "place": "Praha, Žižkov",
+    "og": {
+      "title": "Ruby Butler: It’s Time to Rethink RubyGems and Bundler",
+      "description": "RubyGems and Bundler defined a generation of Ruby. But maybe it’s time to rethink them. Ruby Butler is my take — a fresh start, a new rb command, and a space to experiment again.",
+      "image": "https://rubyelders.com/assets/img/writings/butler_help.png"
+    }
+  },
+  {
     "source": "md/wubular-1.md",
     "title": "Introducing Wubular: Rubular Reimagined in Ruby+WASM",
     "published_at": "26.8.2025",

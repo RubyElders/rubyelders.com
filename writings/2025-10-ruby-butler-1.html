@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby Butler: Time to Rethink RubyGems and Bundler | Ruby Elders</title>
+    <link rel="stylesheet" href="/css/writings.css" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+
+    <meta property="og:title" content="Ruby Butler: It’s Time to Rethink RubyGems and Bundler" />
+
+    <meta property="og:description" content="RubyGems and Bundler defined a generation of Ruby. But maybe it’s time to rethink them. Ruby Butler is my take — a fresh start, a new rb command, and a space to experiment again." />
+
+    <meta property="og:image" content="https://rubyelders.com/assets/img/writings/butler_help.png" />
+
+    <!-- Syntax Highlighting: Prism.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/writings.html">
+        <svg
+          viewBox="0 0 279.09328 71.770356"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m 236.07491,44.384808 c 0,-0.1 -0.2,-0.3 -0.4,-0.4 -1.2,-0.5 -3.7,-0.9 -5.7,-0.9 -3.8,0 -6.5,2.3 -6.5,5.4 0,3 2.2,4.9 4.7,5.9 2,0.8 5.6,1.6 5.6,4.2 0,1.4 -1.6,2.8 -3.2,2.8 -2.2,0 -4.4,-1.8 -5.6,-4.6 -0.4,-1 -0.6,-1.2 -0.9,-1.2 -0.3,0 -0.4,0.3 -0.4,0.7 l 0.3,3.9 c 0,0.7 0.2,1 0.9,1.2 1.9,0.4 3.7,1 5.4,1 4,0 7.5,-3 7.5,-6.5 0,-3.7 -3.5,-5.1 -6.3,-6.3 -2.8,-1.2 -4,-2.1 -4,-3.3 0,-1.3 1.5,-2.4 3.3,-2.4 2,0 4.2,1.8 4.9,4 0.3,0.8 0.4,0.9 0.8,0.9 0.3,0 0.4,-0.1 0.4,-0.4 v -0.3 z"
+          />
+          <path
+            d="m 211.77491,47.384808 v -3.3 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.7,0.3 -0.8,0.3 -1.3,0.5 -2.9,1.2 -5.7,2 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 7.5 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -1.1,0 -2,-0.7 -2,-2.7 v -8.2 c 1.2,-1.7 1.8,-2.3 2.6,-2.3 0.3,0 0.7,0.2 1.2,0.4 0.9,0.4 1.6,0.6 2.1,0.6 1.5,0 2.6,-1 2.6,-2.4 0,-1.3 -1.1,-2.3 -2.6,-2.3 -1.7,-0.2 -4,1.6 -5.8,3.8"
+          />
+          <path
+            d="m 200.57491,56.284808 c -0.1,0 -0.2,0.1 -0.3,0.2 -1.5,2 -3.9,3.2 -6,3.2 -3.3,0 -5.9,-3.2 -5.9,-7.4 0,-0.1 0,-0.3 0,-0.6 h 8.2 2.9 c 1.1,0 1.5,-0.5 1.5,-1.3 0,-0.3 0,-0.7 -0.2,-1.2 -1.2,-3.4 -4.4,-5.8 -8.3,-5.8 -5.2,0 -9.2,4.4 -9.2,10 0,5 4,9.4 8.6,9.4 3.9,0 7.2,-2.3 9,-5.3 0.2,-0.3 0.3,-0.6 0.3,-0.9 -0.1,-0.1 -0.3,-0.3 -0.6,-0.3 z m -8.4,-11.7 c 2.5,0.1 3.9,1.9 3.9,4.9 0,0.3 -0.1,0.7 -0.9,0.7 h -2.8 -3.9 c 0.3,-3.7 1.5,-5.6 3.7,-5.6 z"
+          />
+          <path
+            d="m 179.87491,60.784808 c -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -25.1 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 6.9 c -1.4,-0.6 -2.6,-1 -3.9,-1 -6.1,0 -9.8,4 -9.8,10.4 0,5.3 3.5,9.2 8.3,9.2 1.8,0 4.4,-1 5.5,-2 v 1.7 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.4,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c -0.1,-0.2 -0.2,-0.2 -0.3,-0.3 z m -6.9,-2.1 c -1,1.4 -1.6,1.8 -3,1.8 -3.6,0 -5.9,-3.3 -5.9,-8.3 0,-4.7 1.8,-7.8 4.6,-7.8 2.2,0 3.6,1.4 4.2,3.7 z"
+          />
+          <path
+            d="m 153.37491,32.484808 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 20.2 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.5 c -1.1,0 -2,-0.7 -2,-2.7 z"
+          />
+          <path
+            d="m 123.27491,47.484808 h 6.4 c 3,0 4.9,2.8 4.9,5.2 v 0.6 c 0,0.2 0,0.2 0.2,0.2 h 1.1 c 0.1,0 0.2,0 0.2,-0.2 v -13.5 c 0,-0.2 0,-0.2 -0.2,-0.2 h -1.1 c -0.2,0 -0.2,0 -0.2,0.2 v 0.6 c 0,2.4 -1.9,5.2 -4.9,5.2 h -6.4 v -8.2 c 0,-3.6 0.3,-4.2 4.6,-4.2 4.5,0 9.1,1.1 11.7,4.7 0.8,1.1 1.3,1.7 1.8,1.7 0.3,0 0.4,-0.2 0.4,-0.6 0,-0.2 -0.1,-0.6 -0.3,-1 l -2.5,-5.7 c -0.3,-0.6 -0.3,-0.6 -1.1,-0.6 h -24.3 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 25 c 0.6,0 0.7,-0.2 0.9,-0.6 l 2,-6.4 c 0.2,-0.5 0.2,-0.9 0.2,-1.1 0,-0.3 -0.1,-0.6 -0.3,-0.6 -0.5,0 -1,0.8 -2,2.2 -2.7,3.9 -4.6,4.9 -11.5,4.9 -3.3,0 -4.6,-0.5 -4.6,-1.6 z"
+          />
+          <path
+            d="m 91.2,62.77035 -1.3,2.700008 c -0.3,0.9 -1.1,1.6 -2.2,1.6 h -0.4 c -2.4,0 -3.6,0.9 -3.6,2.6 0,1.2 1,2.1 2.3,2.1 1.8,0 3.1,-1.2 4.5,-4.3 L 99.000004,48.87035 c 1.099996,-2.5 2.299996,-3.2 3.499996,-3.3 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.100004,0.1 1.500004,0.5 1.500004,1.3 0,0.4 -0.1,1 -0.3,1.3 l -3.900004,8.5 -4,-9.1 c -0.3,-0.5 -0.3,-0.9 -0.3,-1.1 0,-0.6 0.6,-0.8 1.6,-0.8 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 H 81.8 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.3,0 1.9,0.6 2.5,2 z"
+          />
+          <path
+            d="m 70.7,43.07035 c -2.3,0 -4.4,1.1 -6,2.4 v -13 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 25.1 l 0.7,-0.1 1.7,-1.6 0.5,-0.3 c 2.6,1.4 4.2,1.9 6.2,1.9 5.2,0 9.4,-4.6 9.4,-10.2 0,-5.4 -3.3,-9.3 -7.8,-9.3 z m -1.5,18.3 c -0.9,0 -2,-0.4 -2.8,-1 -1.4,-1.1 -1.6,-1.6 -1.6,-4 v -9.6 c 1.2,-0.9 1.7,-1.1 3,-1.1 3.7,0 6.3,3.5 6.3,8.2 0,4.2 -2.1,7.5 -4.9,7.5 z"
+          />
+          <path
+            d="m 42,62.47035 c 2.5,0 4.4,-0.7 6.2,-2.9 v 2.4 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.3,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c 0,-0.1 -0.1,-0.2 -0.2,-0.2 -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -12.7 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.3 c -1.5,2.3 -2.6,3.3 -4.3,3.3 -1.7,0 -3.1,-1.5 -3.1,-3.3 v -13.3 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.2 c -0.1,3.1 2.5,5.1 5.9,5.1"
+          />
+          <path
+            d="m 31.2,60.47035 h -0.8 c -1.3,0 -2.5,-0.5 -3.3,-1.7 -0.9,-1.3 -1.3,-2.7 -3,-6.2 -1.5,-2.9 -2.4,-4.5 -3.9,-5.9 -0.2,-0.2 -0.3,-0.3 -0.3,-0.4 0,-0.1 0.1,-0.2 0.4,-0.2 4.2,-1 6.4,-3.3 6.4,-6.7 0,-4.8 -4.6,-7.7 -12.1,-7.7 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 13.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -2.4,0 -3.2999999,-0.6 -3.2999999,-3.6 v -9.8 H 14 c 1.1,0.8 1.6,1.5 2.8,3.8 1.5,2.9 3.1,6.3 4.9,10.8 0.1,0.2 0.2,0.3 0.5,0.3 h 9 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.1 0,-0.2 -0.2,-0.2 z m -19.1,-14.6 c -0.5,0 -1.2,0 -2.1999999,-0.1 v -9.6 c 0,-2.9 0.6999999,-3.4 3.1999999,-3.4 5.3,0 7.9,2 7.9,5.9 0.1,4.4 -3.4,7.2 -8.9,7.2 z"
+          />
+          <g id="hat">
+            <path
+              d="m 239.54646,29.219694 c 2.4,1.6 4.3,2.8 6.3,3.9 0.3,0.2 0.6,0.3 0.9,0.5 5.4,3.1 10.3,5.5 15.1,7.4 1.7,0.7 3.4,1.3 4.9,1.8 0.9,-2.5 2.3,-5.8 4.2,-9.1 2.9,-5 6.4,-9.1 7.9,-10.7 0.4,-0.4 0.3,-1 -0.2,-1.2 l -37.7,-21.7 c -0.5,-0.3 -1,0 -1.2,0.5 -0.6,2.1 -2.4,7.2 -5.3,12.2 -1.9,3.3 -4.1,6.1 -5.8,8.2 1.2,1.1 2.6,2.2 4,3.3 2.1,1.6 4.5,3.4 6.9,4.9 z"
+            />
+            <path
+              d="m 275.04646,48.019694 c -5.1,0.5 -10.3,-0.3 -15.3,-1.7 -5.8,-1.6 -11.3,-4 -16.4,-7 -5.1,-3 -10,-6.6 -14.3,-10.8 -3.6,-3.6 -7,-7.7 -9.1,-12.4 -0.2,-0.3 0.2,-0.6 0.5,-0.5 0,0 0.1,0 0.1,0.1 3.3,3.8 6.9,7.1 10.8,10.1 2.3,1.7 4.5,3.4 6.9,5 2.1,1.4 4.2,2.8 6.4,4 0.3,0.2 0.6,0.3 0.9,0.5 4.9,2.8 10,5.4 15.3,7.5 4.6,1.8 9.2,3.4 14.2,4.3 h 0.1 c 0.3,0.4 0.3,0.9 -0.1,0.9 z"
+            />
+          </g>
+        </svg>
+      </a>
+    </header>
+
+    <article>
+  <header>
+    <h1>Ruby Butler: Time to Rethink RubyGems and Bundler</h1>
+
+    <p class="post-meta">
+      <span class="avatar-text-group">
+        <span class="avatar-name">
+          By
+          <img id="avatar-photo" src="https://avatars.githubusercontent.com/u/193936?v=4" alt="simi avatar">
+          <a href="https://github.com/simi" target="_blank" rel="nofollow noopener"> simi </a>
+        </span>
+        <span class="avatar-meta"> October 19, 2025 — Praha, Žižkov</span>
+      </span>
+    </p>
+  </header>
+
+  <h2 id="the-realization">The Realization</h2>
+
+<p>Earlier this year — long before the recent <a href="https://gist.github.com/simi/349d881d16d3d86947945615a47c60ca" target="_blank" rel="nofollow noopener">Ruby Central fiasco</a> — I started exploring ideas for the next major version (4.x) of RubyGems and Bundler. That’s when it struck me: somewhere along the way, these projects stopped moving forward. Formats like <strong>gemspec</strong>, <strong>Gemfile</strong>, and others haven’t evolved in years, and any attempt to change them usually ends in early rejection.</p>
+
+<p>Over time, RubyGems and Bundler became finely tuned for <strong>large company deployments</strong> and <strong>super-stable environments</strong>, but that same stability now limits innovation. The excitement of experimenting, hacking, and building new ideas into Ruby’s tooling slowly faded — at least for me.</p>
+
+<h2 id="the-inspiration">The Inspiration</h2>
+
+<p>While working on some Python projects recently (mostly <a href="https://github.com/apache/airflow" target="_blank" rel="nofollow noopener">Airflow</a>-related), I was deeply inspired by <strong><a href="https://docs.astral.sh/uv/" target="_blank" rel="nofollow noopener">uv</a></strong> — its simplicity blew me away. The <code>run</code> command just <em>worked</em>: no confusing errors, no excuses, no manual setup. It installed everything needed — even Python itself — and executed the program at lightning speed.</p>
+
+<p>As a partial web developer, I’ve also long admired how JavaScript projects use the <strong>scripts</strong> section in <code>package.json</code>. It’s such a clean way to define project-specific commands — no more copy-pasting long, platform-specific commands from <code>README</code>s. In Ruby, I often had to scan CI setups to figure out how to run specs (<code>rake</code>, <code>rspec</code>, or another runner), how to run linters, and so on.</p>
+
+<h2 id="the-acceptance">The Acceptance</h2>
+
+<p>In Ruby, there’s no single entry point for this kind of extra project metadata or developer scripts. Yes, there’s <strong>Rake</strong>, but it suffers from the classic chicken-and-egg problem — it often loads the entire app environment just to run a simple command. It <em>can</em> be configured otherwise, but that’s rare in practice. Meanwhile, <code>Gemfile</code> is for dependencies, gemspecs aren’t meant for apps, and trying to push features like “install by default” for <code>bundle exec</code> inside Bundler felt nearly impossible (even though an environment variable for it already exists).</p>
+
+<p>At the same time, I’ve always admired how well RubyGems and Bundler work internally — they’re elegant, consistent, and incredibly stable. But I realized I wanted to <strong>recompose</strong> them: use the same powerful internals in a different way, with a simpler and more modern interface. Looking deeper inside, I had to accept a truth — changing them directly would be nearly impossible. However, building a <strong>custom “frontend” wrapper</strong> that instructs these tools to behave differently <em>was</em> possible.</p>
+
+<p>That’s how the idea for <strong>Ruby Butler</strong> was born. From that point, it began taking shape as a simple command-line tool — the <strong><code>rb</code> command</strong> in your terminal, ready to serve.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_help.png" alt="Ruby Butler, nice to meet you!">
+  </picture>
+  <figcaption>
+    Ruby Butler, nice to meet you! Curious what's that? Keep reading to find out.
+  </figcaption>
+</figure>
+
+<h2 id="the-discovery">The Discovery</h2>
+
+<p>Ruby Butler started as a simple Bash script, just mangling a few environment variables needed by Ruby, RubyGems, and Bundler. To control the Ruby environment, all you really need is to put the desired Ruby’s <code>bin</code> directory in your <code>PATH</code> and set two variables — <code>GEM_HOME</code> (where to install gems) and <code>GEM_PATH</code> (<code>GEM_HOME</code> plus Ruby’s default gems). That’s it. That’s the whole “rocket science” behind tools like <a href="https://github.com/postmodern/chruby/blob/a543a35790e5528b5a67de20e78a7390f5f7606e/share/chruby/chruby.sh" target="_blank" rel="nofollow noopener">chruby</a>.</p>
+
+<p>Every Ruby environment tool I’d used — <code>chruby</code>, <code>rbenv</code>, and others — was tied tightly to the <strong>shell</strong> (mostly Bash and friends). That worked, but it often caused friction. You had to ensure your current shell instance matched the Ruby setup you wanted. Tools like <code>chruby-auto</code> helped a bit, but switching Rubies in the same shell session remained tricky. And on systems without a preinstalled Ruby — my preferred setup today — simply running <code>ruby</code> failed until everything was manually configured. I wanted something truly unified — cross-shell, cross-platform, and automatic. I wanted something that would automatically prepare the exact Ruby environment I’m looking for.</p>
+
+<p>That’s where today’s <strong>Ruby Butler</strong> architecture was born.</p>
+
+<h2 id="the-architecture">The Architecture</h2>
+
+<p>Ruby Butler builds on a simple idea: <strong>Rubies are already on your system — you just need the right one at the right time.</strong><br>
+By default, it scans <code>~/.rubies</code> (for compatibility with tools like <a href="https://github.com/postmodern/ruby-install" target="_blank" rel="nofollow noopener">ruby-install</a>) and detects which versions are available. From there, it can automatically select the best Ruby for the current context — or let you decide manually.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_runtime.png" alt="Ruby Butler presenting detected runtimes.">
+  </picture>
+  <figcaption>
+    Ruby Butler presenting detected runtimes.
+  </figcaption>
+</figure>
+
+<p>But the real goal isn’t just <em>choosing</em> a Ruby version. It’s to <strong>prepare a clean, ephemeral environment</strong> where Ruby programs can run without leaving traces behind. This environment exists only for the duration of the command — no shell pollution, no manual resets. For quick scripts, the latest Ruby works just fine. If a <code>.ruby-version</code> file or a <code>Gemfile</code> with a <code>ruby</code> section is detected, Butler automatically switches to the matching version. And when you need something specific, you can ask explicitly: <code>rb -r 3.4.2</code>.</p>
+
+<p>Everything runs through the <code>exec</code> command — <code>rb exec</code>, or simply <code>rb x</code>. It behaves as expected, with no setup needed unless the environment can’t be inferred. Ruby Butler is also smart enough to use <strong>RubyGems binstubs</strong>, eliminating the need for <code>bundle exec</code> or <code>bin/</code> prefixes. Working in a Rails app? Just run <code>rb x rails s</code>. I’ve been experimenting with a shorter alias, <code>rbx</code>, but haven’t fully settled on it yet.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_exec.png" alt="Ruby Butler executing commands in prepared environment!">
+  </picture>
+  <figcaption>
+    Ruby Butler executing commands in prepared environment!
+  </figcaption>
+</figure>
+
+<p>Butler is also clever enough to <strong>compose your Bundler environment automatically</strong>. It runs <code>bundle check</code> and, if necessary, <code>bundle install</code> — all within its own isolated <code>.rb</code> folder. In practice, this means you can literally clone a project and run <code>rb x rspec</code>, and everything just works (unless, of course, other setup like a database is required).</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_exec_bundler.png" alt="Ruby Butler executing commands in bundler prepared environment (with some debug info)!">
+  </picture>
+  <figcaption>
+    Ruby Butler executing commands in bundler prepared environment (with some debug info)!
+  </figcaption>
+</figure>
+
+<h2 id="the-innovation">The Innovation</h2>
+
+<p>And finally, Ruby Butler lets you describe how your project should behave to elevate the overall developer experience. You don’t even have to start from scratch — just run <strong><code>rb init</code></strong>, and Butler will generate a basic <strong><code>rbproject.toml</code></strong> file for you. You can also use alternative names like <strong><code>gem.toml</code></strong>, or the <strong>KDL</strong> variants <code>rbproject.kdl</code> and <code>gem.kdl</code> if you prefer a more structured format.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_toml.png" alt="Ruby Butler rbproject.toml example">
+  </picture>
+  <figcaption>
+    Ruby Butler rbproject.toml example
+  </figcaption>
+</figure>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_kdl.png" alt="Ruby Butler rbproject.kdl example">
+  </picture>
+  <figcaption>
+    Ruby Butler rbproject.kdl example
+  </figcaption>
+</figure>
+
+<p>This marks the beginning of a <strong>new, unified project format for Ruby</strong> — something that could, in time, replace both gemspec and Gemfile. For now, it simply decorates your project with a <strong>name</strong> and a set of <strong>scripts</strong> — commands (optionally with descriptions) that appear as a clean, discoverable list in the CLI via <code>rb run</code>.</p>
+
+<p>And the best part? The Butler <strong>prepares the full environment for you automatically</strong>, just as it does with the <code>exec</code> command. When you run <code>rb run test</code> or <code>rb run lint</code>, Butler silently sets up the correct Ruby, Bundler, and gem context behind the scenes, ensuring everything “just works.” No shell hacks, no manual setup, no guesswork — it’s all part of Butler’s service.</p>
+
+<p>This format is still being explored in collaboration with other modern tools (like <strong>rv</strong>) and may grow into a new long-term standard. The goal is simple but ambitious: to make Ruby development feel <strong>effortless, consistent, and joyful again</strong>.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_run.png" alt="Ruby Butler run list example">
+  </picture>
+  <figcaption>
+    Ruby Butler run list example
+  </figcaption>
+</figure>
+
+<h2 id="the-future">The Future</h2>
+
+<p>Feel free to try out <strong>Ruby Butler</strong> (<a href="https://github.com/RubyElders/ruby-butler" target="_blank" rel="nofollow noopener">github.com/RubyElders/ruby-butler</a>) — maybe it will serve you well too. Personally, I’ve been using it as my <strong>main Ruby development tool</strong> for the past couple of months across <strong>two systems — Windows and Linux</strong> — with great success. It already runs an extensive integration test suite on both platforms: <a href="https://github.com/RubyElders/ruby-butler/tree/667ca6da75025572d9427be72f4bfae34719f8c9/tests" target="_blank" rel="nofollow noopener"><strong>Pester</strong> for PowerShell on Windows</a> and <a href="https://github.com/RubyElders/ruby-butler/tree/667ca6da75025572d9427be72f4bfae34719f8c9/spec" target="_blank" rel="nofollow noopener"><strong>Shellspec</strong> for Bash on Linux</a>.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_multi_ci.png" alt="Ruby Butler being tested">
+  </picture>
+  <figcaption>
+    Ruby Butler being tested
+  </figcaption>
+</figure>
+
+<p>It doesn’t yet solve every problem I’ve encountered over the years with RubyGems and Bundler, but in my opinion, it’s already a <strong>huge improvement</strong> in everyday developer experience. I’d love to hear your ideas and feedback — on GitHub or anywhere else the Ruby conversation lives.</p>
+
+<p>Since Ruby Butler operates in complete isolation, it <strong>won’t interfere with your existing setup or tools</strong>. Just make sure to add the <code>.rb</code> folder and <code>rbproject.toml</code> (or any of its variants) to your global <code>.gitignore</code> for now.</p>
+
+<p>And one last note: please don’t use it in production yet. Ruby Butler is still <strong>evolving rapidly</strong>, and both its API and CLI flags are subject to change. But if you enjoy experimenting and helping Ruby move forward again — that’s exactly the kind of energy Butler was made to serve.</p>
+
+<figure class="wide">
+  <picture>
+    <img src="/assets/img/writings/butler_debug.png" alt="Ruby Butler can explain what's happening when asked via -v or -vv to be verbose.">
+  </picture>
+  <figcaption>
+    Ruby Butler can explain what's happening when asked via -v or -vv to be verbose.
+  </figcaption>
+</figure>
+
+<p>And have I mentioned it’s implemented in <strong>Rust</strong>? Curious why? I’ll explain that story — and what it enables — in one of the next posts.<br>
+And as for whether I’m still happy reusing Bundler and RubyGems after recent events… let’s just say that deserves its own story — coming soon. Time will tell how those tools evolve from here, and I’ll be watching closely.</p>
+
+<hr>
+
+<h2 id="the-epilogue">The Epilogue</h2>
+
+<p>During Ruby Butler’s early development, I shared early ideas and prototypes with several friends and respected members of the Ruby ecosystem — even before it was public on GitHub. To be transparent, I was also looking for potential <strong>funding or interest</strong> to see whether this kind of work could grow into something more official. I reached out to <strong>Ruby Central</strong>, offering them the opportunity to develop Ruby Butler under their umbrella as an <strong>experimental incubator</strong> — a safe space to test and validate new ideas that could later be <strong>ported or integrated into RubyGems and Bundler</strong> once proven useful.</p>
+
+<p>The response was polite but simple: <em>there’s no interest or funding for this kind of development.</em></p>
+
+<p>More recently, I’ve also submitted a <strong>grant proposal to the <a href="https://www.ruby.or.jp/en/" target="_blank" rel="nofollow noopener">Ruby Association</a></strong> — we’ll see how that goes.</p>
+
+</article>
+
+<hr class="end">
+
+<center><a href="/writings.html">Back to writings list.</a></center>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="/assets/js/writings.js"></script>
+  </body>
+</html>
+
