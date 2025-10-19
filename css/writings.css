@@ -297,3 +297,8 @@ figure picture img {
   height: auto;
   max-width: 100%;
 }
+
+figure.wide picture img {
+  width: unset;
+  max-width: 100%;
+}
