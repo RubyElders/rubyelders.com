@@ -176,4 +176,4 @@ During Ruby Butler’s early development, I shared early ideas and prototypes wi
 
 The response was polite but simple: *there’s no interest or funding for this kind of development.*
 
-More recently, I’ve also submitted a **grant proposal to the [Ruby Association](https://www.ruby.or.jp/en/)** — we’ll see how that goes.
+More recently, I’ve also submitted a **grant proposal to the [Ruby Association](https://www.ruby.or.jp/en/)** — also rejected.
