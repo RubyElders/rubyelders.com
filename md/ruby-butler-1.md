@@ -117,7 +117,7 @@ This marks the beginning of a **new, unified project format for Ruby** — somet
 
 And the best part? The Butler **prepares the full environment for you automatically**, just as it does with the `exec` command. When you run `rb run test` or `rb run lint`, Butler silently sets up the correct Ruby, Bundler, and gem context behind the scenes, ensuring everything “just works.” No shell hacks, no manual setup, no guesswork — it’s all part of Butler’s service.
 
-This format is still being explored in collaboration with other modern tools (like **rv**) and may grow into a new long-term standard. The goal is simple but ambitious: to make Ruby development feel **effortless, consistent, and joyful again**.
+This format is still being explored in collaboration with other modern tools (like **[rv](https://github.com/spinel-coop/rv)**) and may grow into a new long-term standard. The goal is simple but ambitious: to make Ruby development feel **effortless, consistent, and joyful again**.
 
 <figure class="wide">
   <picture>
