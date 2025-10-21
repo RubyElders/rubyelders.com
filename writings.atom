@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <author>
+    <name>Ruby Elders</name>
+  </author>
+  <id>https://rubyelders.com/writings.html</id>
+  <title>Ruby Elders&#39; writings</title>
+  <updated>2025-10-21T02:47:45+02:00</updated>
+  <entry>
+    <id>https://rubyelders.com/writings/2025-10-ruby-butler-1.html</id>
+    <link href="https://rubyelders.com/writings/2025-10-ruby-butler-1.html"/>
+    <summary>RubyGems and Bundler defined a generation of Ruby. But maybe it’s time to rethink them. Ruby Butler is my take — a fresh start, a new rb command, and a space to experiment again.</summary>
+    <title>Ruby Butler: Time to Rethink RubyGems and Bundler</title>
+    <updated>2025-10-19T00:00:00+02:00</updated>
+    <dc:date>2025-10-19T00:00:00+02:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://rubyelders.com/writings/2025-08-wubular-1.html</id>
+    <link href="https://rubyelders.com/writings/2025-08-wubular-1.html"/>
+    <summary>Rubular set the standard for regex testing in Ruby. With Ruby 3.2 bringing WebAssembly support, Wubular takes that idea into the browser — no servers, instant feedback, full privacy. It’s not just a remake, but a glimpse of what Ruby + WASM make possible for future apps.</summary>
+    <title>Introducing Wubular: Rubular Reimagined in Ruby+WASM</title>
+    <updated>2025-08-26T00:00:00+02:00</updated>
+    <dc:date>2025-08-26T00:00:00+02:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://rubyelders.com/writings/2025-08-we-love-ruby-march-2025.html</id>
+    <link href="https://rubyelders.com/writings/2025-08-we-love-ruby-march-2025.html"/>
+    <title>We ❤️ Ruby — March 2025: Our First Deep Dive into the RubyGems.org Ecosystem</title>
+    <updated>2025-08-12T00:00:00+02:00</updated>
+    <dc:date>2025-08-12T00:00:00+02:00</dc:date>
+  </entry>
+  <dc:date>2025-10-21T02:47:45+02:00</dc:date>
+</feed>

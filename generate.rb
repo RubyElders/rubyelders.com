@@ -8,6 +8,7 @@ gemfile(true) do
   gem "kramdown"
   gem "kramdown-parser-gfm"
   gem "nokogiri"
+  gem "rss"
 end
 
 require 'json'
@@ -16,6 +17,7 @@ require 'date'
 require 'fileutils'
 require 'kramdown'
 require 'nokogiri'
+require 'rss'
 
 # Load writings.json
 writings_data = JSON.parse(File.read('writings.json'))
@@ -85,3 +87,23 @@ writings.each do |w|
   File.write("writings/#{w[:slug]}.html", full_html)
   puts "Generated writings/#{w[:slug]}.html"
 end
+
+# Generate atom feed
+rss = RSS::Maker.make("atom") do |maker|
+  maker.channel.author = "Ruby Elders"
+  maker.channel.updated = Time.now.to_s
+  maker.channel.about = "https://rubyelders.com/writings.html"
+  maker.channel.title = "Ruby Elders' writings"
+
+  writings.each do |writing|
+    maker.items.new_item do |item|
+      item.link = "https://rubyelders.com/writings/#{writing[:slug]}.html"
+      item.title = writing[:title]
+      item.summary = writing.dig(:og, 'description')
+      item.updated = writing[:published_at]
+    end
+  end
+end
+
+File.write("writings.atom", rss)
+puts "Generated writings.atom"
