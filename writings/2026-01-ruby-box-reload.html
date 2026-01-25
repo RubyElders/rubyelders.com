@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby::Box: Rethinking Code Reloading with Isolated Namespaces | Ruby Elders</title>
+    <link rel="stylesheet" href="/css/writings.css" />
+    <link href="/writings.atom" type="application/atom+xml" rel="alternate" title="Ruby Elders' writings" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+
+    <meta property="og:title" content="Ruby::Box: Rethinking Code Reloading with Isolated Namespaces" />
+
+    <meta property="og:description" content="Ruby's experimental Ruby::Box feature offers a fresh approach to code reloading - instead of tracking constants, just load code in isolation and discard it afterwards. Here's what it makes possible, and where it still needs work." />
+
+    <meta property="og:image" content="https://rubyelders.com/assets/img/writings/ruby_box_reload_og_image.png" />
+
+    <!-- Syntax Highlighting: Prism.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/writings.html">
+        <svg
+          viewBox="0 0 279.09328 71.770356"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m 236.07491,44.384808 c 0,-0.1 -0.2,-0.3 -0.4,-0.4 -1.2,-0.5 -3.7,-0.9 -5.7,-0.9 -3.8,0 -6.5,2.3 -6.5,5.4 0,3 2.2,4.9 4.7,5.9 2,0.8 5.6,1.6 5.6,4.2 0,1.4 -1.6,2.8 -3.2,2.8 -2.2,0 -4.4,-1.8 -5.6,-4.6 -0.4,-1 -0.6,-1.2 -0.9,-1.2 -0.3,0 -0.4,0.3 -0.4,0.7 l 0.3,3.9 c 0,0.7 0.2,1 0.9,1.2 1.9,0.4 3.7,1 5.4,1 4,0 7.5,-3 7.5,-6.5 0,-3.7 -3.5,-5.1 -6.3,-6.3 -2.8,-1.2 -4,-2.1 -4,-3.3 0,-1.3 1.5,-2.4 3.3,-2.4 2,0 4.2,1.8 4.9,4 0.3,0.8 0.4,0.9 0.8,0.9 0.3,0 0.4,-0.1 0.4,-0.4 v -0.3 z"
+          />
+          <path
+            d="m 211.77491,47.384808 v -3.3 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.7,0.3 -0.8,0.3 -1.3,0.5 -2.9,1.2 -5.7,2 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 7.5 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -1.1,0 -2,-0.7 -2,-2.7 v -8.2 c 1.2,-1.7 1.8,-2.3 2.6,-2.3 0.3,0 0.7,0.2 1.2,0.4 0.9,0.4 1.6,0.6 2.1,0.6 1.5,0 2.6,-1 2.6,-2.4 0,-1.3 -1.1,-2.3 -2.6,-2.3 -1.7,-0.2 -4,1.6 -5.8,3.8"
+          />
+          <path
+            d="m 200.57491,56.284808 c -0.1,0 -0.2,0.1 -0.3,0.2 -1.5,2 -3.9,3.2 -6,3.2 -3.3,0 -5.9,-3.2 -5.9,-7.4 0,-0.1 0,-0.3 0,-0.6 h 8.2 2.9 c 1.1,0 1.5,-0.5 1.5,-1.3 0,-0.3 0,-0.7 -0.2,-1.2 -1.2,-3.4 -4.4,-5.8 -8.3,-5.8 -5.2,0 -9.2,4.4 -9.2,10 0,5 4,9.4 8.6,9.4 3.9,0 7.2,-2.3 9,-5.3 0.2,-0.3 0.3,-0.6 0.3,-0.9 -0.1,-0.1 -0.3,-0.3 -0.6,-0.3 z m -8.4,-11.7 c 2.5,0.1 3.9,1.9 3.9,4.9 0,0.3 -0.1,0.7 -0.9,0.7 h -2.8 -3.9 c 0.3,-3.7 1.5,-5.6 3.7,-5.6 z"
+          />
+          <path
+            d="m 179.87491,60.784808 c -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -25.1 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 6.9 c -1.4,-0.6 -2.6,-1 -3.9,-1 -6.1,0 -9.8,4 -9.8,10.4 0,5.3 3.5,9.2 8.3,9.2 1.8,0 4.4,-1 5.5,-2 v 1.7 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.4,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c -0.1,-0.2 -0.2,-0.2 -0.3,-0.3 z m -6.9,-2.1 c -1,1.4 -1.6,1.8 -3,1.8 -3.6,0 -5.9,-3.3 -5.9,-8.3 0,-4.7 1.8,-7.8 4.6,-7.8 2.2,0 3.6,1.4 4.2,3.7 z"
+          />
+          <path
+            d="m 153.37491,32.484808 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 20.2 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.5 c -1.1,0 -2,-0.7 -2,-2.7 z"
+          />
+          <path
+            d="m 123.27491,47.484808 h 6.4 c 3,0 4.9,2.8 4.9,5.2 v 0.6 c 0,0.2 0,0.2 0.2,0.2 h 1.1 c 0.1,0 0.2,0 0.2,-0.2 v -13.5 c 0,-0.2 0,-0.2 -0.2,-0.2 h -1.1 c -0.2,0 -0.2,0 -0.2,0.2 v 0.6 c 0,2.4 -1.9,5.2 -4.9,5.2 h -6.4 v -8.2 c 0,-3.6 0.3,-4.2 4.6,-4.2 4.5,0 9.1,1.1 11.7,4.7 0.8,1.1 1.3,1.7 1.8,1.7 0.3,0 0.4,-0.2 0.4,-0.6 0,-0.2 -0.1,-0.6 -0.3,-1 l -2.5,-5.7 c -0.3,-0.6 -0.3,-0.6 -1.1,-0.6 h -24.3 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 25 c 0.6,0 0.7,-0.2 0.9,-0.6 l 2,-6.4 c 0.2,-0.5 0.2,-0.9 0.2,-1.1 0,-0.3 -0.1,-0.6 -0.3,-0.6 -0.5,0 -1,0.8 -2,2.2 -2.7,3.9 -4.6,4.9 -11.5,4.9 -3.3,0 -4.6,-0.5 -4.6,-1.6 z"
+          />
+          <path
+            d="m 91.2,62.77035 -1.3,2.700008 c -0.3,0.9 -1.1,1.6 -2.2,1.6 h -0.4 c -2.4,0 -3.6,0.9 -3.6,2.6 0,1.2 1,2.1 2.3,2.1 1.8,0 3.1,-1.2 4.5,-4.3 L 99.000004,48.87035 c 1.099996,-2.5 2.299996,-3.2 3.499996,-3.3 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.100004,0.1 1.500004,0.5 1.500004,1.3 0,0.4 -0.1,1 -0.3,1.3 l -3.900004,8.5 -4,-9.1 c -0.3,-0.5 -0.3,-0.9 -0.3,-1.1 0,-0.6 0.6,-0.8 1.6,-0.8 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 H 81.8 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.3,0 1.9,0.6 2.5,2 z"
+          />
+          <path
+            d="m 70.7,43.07035 c -2.3,0 -4.4,1.1 -6,2.4 v -13 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 25.1 l 0.7,-0.1 1.7,-1.6 0.5,-0.3 c 2.6,1.4 4.2,1.9 6.2,1.9 5.2,0 9.4,-4.6 9.4,-10.2 0,-5.4 -3.3,-9.3 -7.8,-9.3 z m -1.5,18.3 c -0.9,0 -2,-0.4 -2.8,-1 -1.4,-1.1 -1.6,-1.6 -1.6,-4 v -9.6 c 1.2,-0.9 1.7,-1.1 3,-1.1 3.7,0 6.3,3.5 6.3,8.2 0,4.2 -2.1,7.5 -4.9,7.5 z"
+          />
+          <path
+            d="m 42,62.47035 c 2.5,0 4.4,-0.7 6.2,-2.9 v 2.4 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.3,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c 0,-0.1 -0.1,-0.2 -0.2,-0.2 -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -12.7 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.3 c -1.5,2.3 -2.6,3.3 -4.3,3.3 -1.7,0 -3.1,-1.5 -3.1,-3.3 v -13.3 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.2 c -0.1,3.1 2.5,5.1 5.9,5.1"
+          />
+          <path
+            d="m 31.2,60.47035 h -0.8 c -1.3,0 -2.5,-0.5 -3.3,-1.7 -0.9,-1.3 -1.3,-2.7 -3,-6.2 -1.5,-2.9 -2.4,-4.5 -3.9,-5.9 -0.2,-0.2 -0.3,-0.3 -0.3,-0.4 0,-0.1 0.1,-0.2 0.4,-0.2 4.2,-1 6.4,-3.3 6.4,-6.7 0,-4.8 -4.6,-7.7 -12.1,-7.7 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 13.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -2.4,0 -3.2999999,-0.6 -3.2999999,-3.6 v -9.8 H 14 c 1.1,0.8 1.6,1.5 2.8,3.8 1.5,2.9 3.1,6.3 4.9,10.8 0.1,0.2 0.2,0.3 0.5,0.3 h 9 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.1 0,-0.2 -0.2,-0.2 z m -19.1,-14.6 c -0.5,0 -1.2,0 -2.1999999,-0.1 v -9.6 c 0,-2.9 0.6999999,-3.4 3.1999999,-3.4 5.3,0 7.9,2 7.9,5.9 0.1,4.4 -3.4,7.2 -8.9,7.2 z"
+          />
+          <g id="hat">
+            <path
+              d="m 239.54646,29.219694 c 2.4,1.6 4.3,2.8 6.3,3.9 0.3,0.2 0.6,0.3 0.9,0.5 5.4,3.1 10.3,5.5 15.1,7.4 1.7,0.7 3.4,1.3 4.9,1.8 0.9,-2.5 2.3,-5.8 4.2,-9.1 2.9,-5 6.4,-9.1 7.9,-10.7 0.4,-0.4 0.3,-1 -0.2,-1.2 l -37.7,-21.7 c -0.5,-0.3 -1,0 -1.2,0.5 -0.6,2.1 -2.4,7.2 -5.3,12.2 -1.9,3.3 -4.1,6.1 -5.8,8.2 1.2,1.1 2.6,2.2 4,3.3 2.1,1.6 4.5,3.4 6.9,4.9 z"
+            />
+            <path
+              d="m 275.04646,48.019694 c -5.1,0.5 -10.3,-0.3 -15.3,-1.7 -5.8,-1.6 -11.3,-4 -16.4,-7 -5.1,-3 -10,-6.6 -14.3,-10.8 -3.6,-3.6 -7,-7.7 -9.1,-12.4 -0.2,-0.3 0.2,-0.6 0.5,-0.5 0,0 0.1,0 0.1,0.1 3.3,3.8 6.9,7.1 10.8,10.1 2.3,1.7 4.5,3.4 6.9,5 2.1,1.4 4.2,2.8 6.4,4 0.3,0.2 0.6,0.3 0.9,0.5 4.9,2.8 10,5.4 15.3,7.5 4.6,1.8 9.2,3.4 14.2,4.3 h 0.1 c 0.3,0.4 0.3,0.9 -0.1,0.9 z"
+            />
+          </g>
+        </svg>
+      </a>
+    </header>
+
+    <article>
+  <header>
+    <h1>Ruby::Box: Rethinking Code Reloading with Isolated Namespaces</h1>
+
+    <p class="post-meta">
+      <span class="avatar-text-group">
+        <span class="avatar-name">
+          By
+          <img id="avatar-photo" src="https://avatars.githubusercontent.com/u/193936?v=4" alt="simi avatar">
+          <a href="https://github.com/simi" target="_blank" rel="nofollow noopener"> simi </a>
+        </span>
+        <span class="avatar-meta"> January 25, 2026 — Praha, Žižkov</span>
+      </span>
+    </p>
+  </header>
+
+  <p>Ruby lives in a single global object space. Classes, modules, and constants can see each other, reopen each other, and override each other freely. This is one of Ruby’s greatest design strengths: it enables expressive DSLs, powerful metaprogramming, and a level of flexibility that few languages can match. At the same time, it comes with a cost. When everything is global, isolation is difficult, and undoing already executed code — especially code that has already been loaded — quickly becomes problematic.</p>
+
+<p>Ruby developers value fast feedback loops, yet restarting a web server breaks flow, and safely reloading code inside a long-running process is fragile by nature. Once a file is loaded or a constant is defined, the runtime offers no simple way to rewind that state. Current reloading tools like <img src="https://avatars.githubusercontent.com/u/3387?v=4" class="avatar"> <a href="https://github.com/fxn" target="_blank" rel="nofollow noopener">Xavier Noria’s (@fxn)</a> <a href="https://github.com/fxn/zeitwerk" target="_blank" rel="nofollow noopener">Zeitwerk</a>, <img src="https://avatars.githubusercontent.com/u/404?v=4" class="avatar"> <a href="https://github.com/rtomayko" target="_blank" rel="nofollow noopener">Ryan Tomayko’s (@rtomayko)</a> older tool <a href="https://github.com/rtomayko/shotgun" target="_blank" rel="nofollow noopener">shotgun</a>, or <img src="https://avatars.githubusercontent.com/u/3846?v=4" class="avatar"> <a href="https://github.com/jeremyevans" target="_blank" rel="nofollow noopener">Jeremy Evans’s (@jeremyevans)</a> <a href="https://github.com/jeremyevans/rack-unreloader" target="_blank" rel="nofollow noopener">rack-unreloader</a> are using various tricks like tracing, unloading/loading, or even forking and doing IPC (inter-process communication) in a shared global environment. They are effective, but they fight Ruby’s shared global object space. With <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a>, there’s a different approach — load code in isolation, use it, and discard the entire world afterwards.</p>
+
+<hr>
+
+<p>Let’s see the problem in action with a simple Rack app in <code>config.ru</code> file.</p>
+
+<pre><code class="language-ruby"># config.ru
+class HelloApp
+  LOADED = Time.now
+
+  def self.call(env)
+    http_status = 200
+    headers = {'content-type' =&gt; 'text/html'}
+    body = &lt;&lt;~HTML
+        &lt;h1&gt;Hello from test app!&lt;/h1&gt;
+        &lt;p&gt;Edit config.ru and reload to see changes&lt;/p&gt;
+        &lt;i&gt;Loaded at #{LOADED}.&lt;/i&gt;
+    HTML
+
+    [http_status, headers, [body]]
+  end
+end
+
+run HelloApp
+</code></pre>
+
+<p>The <code>LOADED = Time.now</code> constant is evaluated once at boot and never changes across requests.</p>
+
+<p>To run a simple Rack app, install the <a href="https://rubygems.org/gems/rackup" target="_blank" rel="nofollow noopener"><code>rackup</code></a> gem and some HTTP server (like <a href="https://rubygems.org/gems/webrick" target="_blank" rel="nofollow noopener"><code>webrick</code></a>) with <code>gem install rackup webrick</code>. Save the code above as <code>config.ru</code> and run with <code>rackup config.ru</code> - it’ll expose the app on <a href="http://localhost:9292" target="_blank" rel="nofollow noopener">http://localhost:9292</a> (check output if different). Navigate in a browser and refresh - the <code>LOADED</code> timestamp appears. Now edit the file and refresh again - nothing changes, the timestamp stays frozen. Restart the server manually and refresh - only now the update appears.</p>
+
+<p><em>Notice the <code>run</code> method call. That’s how a Rack app tells the server where the entry point is. By default Rack servers expect this file to be named <code>config.ru</code>. This same pattern appears in <a href="https://rubygems.org/gems/rails" target="_blank" rel="nofollow noopener"><code>Rails</code></a> apps - Rails is a valid Rack app.</em></p>
+
+<hr>
+
+<h2 id="boxed-rack-reload">Boxed Rack Reload</h2>
+
+<p>Using <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a> it’s possible to create a separate Ruby “namespace” next to the main one. This namespace doesn’t share anything with the top-level environment. It can be created on the fly using <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a> calls. Let’s put this together and create an auto-reloading Rack server that loads the host app on each request into a separate <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a>.</p>
+
+<p>I have released my naive PoC implementation as the self-hosted <a href="https://github.com/RubyElders/rackup-box" target="_blank" rel="nofollow noopener"><code>rackup-box</code></a> gem. To try it locally, install with:</p>
+
+<pre><code class="language-bash">gem install rackup-box --clear-sources --source https://rubyelders.github.io/rackup-box --source https://gem.coop
+</code></pre>
+
+<p>Create a <code>config.ru</code> file with the Rack app example from above and run:</p>
+
+<pre><code class="language-bash">RUBY_BOX=1 rackup-box config.ru
+</code></pre>
+
+<p>The app runs on <a href="http://localhost:9292/" target="_blank" rel="nofollow noopener">http://localhost:9292/</a>. Now refresh the page - the <code>LOADED</code> timestamp changes with each request. Edit <code>config.ru</code> and refresh again - the changes appear immediately. No server restart needed.</p>
+
+<p>See the magic? Ruby reloaded the file on each web request - no constant tracking, no forking, no preloading, no complex inter-process communication. Just a clean isolated namespace that appears, serves the request, and disappears.</p>
+
+<p>Here’s how it works - the complete commented implementation:</p>
+
+<pre><code class="language-ruby">require 'rack'
+require 'rackup'
+
+# load specified rack app or standard rackup file
+config_file = ARGV[0] || 'config.ru'
+
+class BoxReloader
+  def initialize(config_file)
+    @config_file = File.expand_path(config_file)
+  end
+
+  def call(env)
+    box = Ruby::Box.new # creates new isolated namespace
+    box.eval("def run(app) = $app = app") # load shim to mimic rack server
+    box.require(@config_file) # let box load the app
+    app = box.eval('$app') # expose the loaded app back to main namespace
+
+    app.call(env) # execute app request
+  end
+end
+
+# start reloader using rackup and webrick HTTP server
+app = BoxReloader.new(config_file)
+Rackup::Handler::WEBrick.run(app, Port: 9292, Host: '127.0.0.1')
+</code></pre>
+
+<hr>
+
+<h2 id="whats-next">What’s next?</h2>
+
+<h3 id="can-it-reload-sinatra-or-rails-app-not-yet">Can it reload <a href="https://rubygems.org/gems/sinatra" target="_blank" rel="nofollow noopener"><code>Sinatra</code></a> or <a href="https://rubygems.org/gems/rails" target="_blank" rel="nofollow noopener"><code>Rails</code></a> app? Not yet.</h3>
+
+<p>I often craft small one-file <a href="https://rubygems.org/gems/sinatra" target="_blank" rel="nofollow noopener"><code>Sinatra</code></a> apps to prototype or design APIs. Since a Sinatra app is also a valid Rack app, it should be as simple as using the same <a href="https://github.com/RubyElders/rackup-box" target="_blank" rel="nofollow noopener"><code>rackup-box</code></a> reloader, right?</p>
+
+<p>Not quite yet. Try it - the error reveals an interesting limitation.</p>
+
+<p>To load a <a href="https://rubygems.org/gems/sinatra" target="_blank" rel="nofollow noopener"><code>Sinatra</code></a> app, Sinatra and its dependencies need to be loaded. <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a> currently doesn’t support loading RubyGems - the list of activated gems and some RubyGems internals are still shared globally. This is a known limitation of the experimental implementation and RubyGems design.</p>
+
+<p><em>It is actually possible to load Sinatra using a few tricks. I’ll explore a workaround in another writing. Stay tuned.</em></p>
+
+<h3 id="current-limitations">Current Limitations</h3>
+
+<p>Boxes don’t seem to release memory as expected. Even in the simple <code>BoxReloader</code> case, I tested with 100k requests and observed continuous memory growth, even when manually calling <code>GC.start</code>. There are also occasional segfaults I have not been able to consistently reproduce yet. I’ll continue exploring and report.</p>
+
+<hr>
+
+<p><a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a> shows real promise for solving Ruby’s long-standing code reloading challenges. The approach is elegant - instead of fighting Ruby’s global namespace, embrace isolation. While it’s still experimental and has rough edges, the core concept works beautifully for simple cases. As the implementation matures and gains dependencies loading support, it could transform how we develop Ruby applications.</p>
+
+<p>Worth watching this space.</p>
+
+</article>
+
+<hr class="end">
+
+<center><a href="/writings.html">Back to writings list.</a></center>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-ruby.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="/assets/js/writings.js"></script>
+  </body>
+</html>
+

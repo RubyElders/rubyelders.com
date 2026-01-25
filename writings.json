@@ -1,5 +1,20 @@
 [
   {
+    "source": "md/ruby-box-reload.md",
+    "title": "Ruby::Box: Rethinking Code Reloading with Isolated Namespaces",
+    "published_at": "25.1.2026",
+    "slug": "2026-01-ruby-box-reload",
+    "author": "simi",
+    "author_avatar_url": "https://avatars.githubusercontent.com/u/193936?v=4",
+    "author_url": "https://github.com/simi",
+    "place": "Praha, Žižkov",
+    "og": {
+      "title": "Ruby::Box: Rethinking Code Reloading with Isolated Namespaces",
+      "description": "Ruby's experimental Ruby::Box feature offers a fresh approach to code reloading - instead of tracking constants, just load code in isolation and discard it afterwards. Here's what it makes possible, and where it still needs work.",
+      "image": "https://rubyelders.com/assets/img/writings/ruby_box_reload_og_image.png"
+    }
+  },
+  {
     "source": "md/ruby-butler-1.md",
     "title": "Ruby Butler: Time to Rethink RubyGems and Bundler",
     "published_at": "19.10.2025",

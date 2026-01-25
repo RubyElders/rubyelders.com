@@ -6,7 +6,15 @@
   </author>
   <id>https://rubyelders.com/writings.html</id>
   <title>Ruby Elders&#39; writings</title>
-  <updated>2025-10-21T02:47:45+02:00</updated>
+  <updated>2026-01-25T16:34:21+01:00</updated>
+  <entry>
+    <id>https://rubyelders.com/writings/2026-01-ruby-box-reload.html</id>
+    <link href="https://rubyelders.com/writings/2026-01-ruby-box-reload.html"/>
+    <summary>Ruby&#39;s experimental Ruby::Box feature offers a fresh approach to code reloading - instead of tracking constants, just load code in isolation and discard it afterwards. Here&#39;s what it makes possible, and where it still needs work.</summary>
+    <title>Ruby::Box: Rethinking Code Reloading with Isolated Namespaces</title>
+    <updated>2026-01-25T00:00:00+01:00</updated>
+    <dc:date>2026-01-25T00:00:00+01:00</dc:date>
+  </entry>
   <entry>
     <id>https://rubyelders.com/writings/2025-10-ruby-butler-1.html</id>
     <link href="https://rubyelders.com/writings/2025-10-ruby-butler-1.html"/>
@@ -30,5 +38,5 @@
     <updated>2025-08-12T00:00:00+02:00</updated>
     <dc:date>2025-08-12T00:00:00+02:00</dc:date>
   </entry>
-  <dc:date>2025-10-21T02:47:45+02:00</dc:date>
+  <dc:date>2026-01-25T16:34:21+01:00</dc:date>
 </feed>
