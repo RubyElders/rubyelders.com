@@ -87,7 +87,19 @@
 
   <p>Ruby lives in a single global object space. Classes, modules, and constants can see each other, reopen each other, and override each other freely. This is one of Ruby’s greatest design strengths: it enables expressive DSLs, powerful metaprogramming, and a level of flexibility that few languages can match. At the same time, it comes with a cost. When everything is global, isolation is difficult, and undoing already executed code — especially code that has already been loaded — quickly becomes problematic.</p>
 
-<p>Ruby developers value fast feedback loops, yet restarting a web server breaks flow, and safely reloading code inside a long-running process is fragile by nature. Once a file is loaded or a constant is defined, the runtime offers no simple way to rewind that state. Current reloading tools tackle this in different ways: <img src="https://avatars.githubusercontent.com/u/3387?v=4" class="avatar"> <a href="https://github.com/fxn" target="_blank" rel="nofollow noopener">Xavier Noria’s (@fxn)</a> <a href="https://github.com/fxn/zeitwerk" target="_blank" rel="nofollow noopener">Zeitwerk</a> tracks and unloads all reloadable constants on every change, <img src="https://avatars.githubusercontent.com/u/3846?v=4" class="avatar"> <a href="https://github.com/jeremyevans" target="_blank" rel="nofollow noopener">Jeremy Evans’s (@jeremyevans)</a> <a href="https://github.com/jeremyevans/rack-unreloader" target="_blank" rel="nofollow noopener">rack-unreloader</a> selectively unloads only the constants that changed, and <img src="https://avatars.githubusercontent.com/u/404?v=4" class="avatar"> <a href="https://github.com/rtomayko" target="_blank" rel="nofollow noopener">Ryan Tomayko’s (@rtomayko)</a> <a href="https://github.com/rtomayko/shotgun" target="_blank" rel="nofollow noopener">shotgun</a> forks the process and uses IPC (inter-process communication) to handle each request in isolation. They are effective, but they all fight Ruby’s shared global object space. With <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a>, there’s a different approach — load code in isolation, use it, and discard the entire world afterwards.</p>
+<p>Ruby developers value fast feedback loops, yet restarting a web server breaks flow, and safely reloading code inside a long-running process is fragile by nature. Once a file is loaded or a constant is defined, the runtime offers no simple way to rewind that state.</p>
+
+<p>Current reloading tools tackle this in different ways:</p>
+<ul>
+  <li>
+<img src="https://avatars.githubusercontent.com/u/3387?v=4" class="avatar"> <a href="https://github.com/fxn" target="_blank" rel="nofollow noopener">Xavier Noria’s (@fxn)</a> <a href="https://github.com/fxn/zeitwerk" target="_blank" rel="nofollow noopener">Zeitwerk</a> tracks and unloads all reloadable constants on every change</li>
+  <li>
+<img src="https://avatars.githubusercontent.com/u/3846?v=4" class="avatar"> <a href="https://github.com/jeremyevans" target="_blank" rel="nofollow noopener">Jeremy Evans’s (@jeremyevans)</a> <a href="https://github.com/jeremyevans/rack-unreloader" target="_blank" rel="nofollow noopener">rack-unreloader</a> selectively unloads only the constants that changed</li>
+  <li>
+<img src="https://avatars.githubusercontent.com/u/404?v=4" class="avatar"> <a href="https://github.com/rtomayko" target="_blank" rel="nofollow noopener">Ryan Tomayko’s (@rtomayko)</a> <a href="https://github.com/rtomayko/shotgun" target="_blank" rel="nofollow noopener">shotgun</a> forks the process and uses IPC (inter-process communication) to handle each request in isolation</li>
+</ul>
+
+<p>They are effective, but they all fight Ruby’s shared global object space. With <a href="https://docs.ruby-lang.org/en/4.0/Ruby/Box.html" target="_blank" rel="nofollow noopener"><code>Ruby::Box</code></a>, there’s a different approach — load code in isolation, use it, and discard the entire world afterwards.</p>
 
 <hr>
 
