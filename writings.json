@@ -1,5 +1,20 @@
 [
   {
+    "source": "md/schnellmcp.md",
+    "title": "SchnellMCP: Ruby native MCP server experience",
+    "published_at": "20.2.2026",
+    "slug": "2026-02-schnellmcp",
+    "author": "simi",
+    "author_avatar_url": "https://avatars.githubusercontent.com/u/193936?v=4",
+    "author_url": "https://github.com/simi",
+    "place": "Praha, Žižkov",
+    "og": {
+      "title": "SchnellMCP: Ruby native MCP server experience",
+      "description": "Inspired by Python's FastMCP simplicity, SchnellMCP brings the same elegant developer experience to Ruby. Create powerful MCP servers with plain Ruby methods, native type annotations, and a single decorator — no complexity, just Ruby doing what it does best.",
+      "image": "https://rubyelders.com/assets/img/writings/schnell_og_image.png"
+    }
+  },
+  {
     "source": "md/ruby-box-reload.md",
     "title": "Ruby::Box: Rethinking Code Reloading with Isolated Namespaces",
     "published_at": "25.1.2026",
