@@ -154,6 +154,10 @@ img.avatar {
   width: 100%;
 }
 
+.site-header svg {
+  fill: var(--color-text);
+}
+
 .site-logo {
   display: block;
   width: 100%;
@@ -268,4 +272,23 @@ figure picture img {
 figure.wide picture img {
   width: unset;
   max-width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: hsl(0, 0%, 88%);
+    --color-bg: hsl(0, 0%, 10%);
+    --color-accent: hsl(0, 0%, 75%);
+    --color-accent-hover: hsl(146, 24%, 55%);
+    --color-code-bg: hsl(240, 10%, 18%);
+  }
+
+  .post-meta {
+    color: hsl(0, 0%, 62%);
+  }
+
+  hr:before,
+  hr.end:before {
+    filter: invert(1);
+  }
 }
