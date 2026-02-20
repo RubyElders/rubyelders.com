@@ -1,27 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&display=swap");
-
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon.eot");
-  src: local("☺"), url("../assets/fonts/caslon.woff") format("woff"), url("../assets/fonts/caslon.ttf") format("truetype"), url("../assets/fonts/caslon.svg") format("svg");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon-bold.eot");
-  src: local("☺"), url("../assets/fonts/caslon-bold.woff") format("woff"), url("../assets/fonts/caslon-bold.ttf") format("truetype"), url("../assets/fonts/caslon-bold.svg") format("svg");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon-bold-italic.eot");
-  src: local("☺"), url("../assets/fonts/caslon-bold-italic.woff") format("woff"), url("../assets/fonts/caslon-bold-italic.ttf") format("truetype"), url("../assets/fonts/caslon-bold-italic.svg") format("svg");
-  font-weight: 700;
-  font-style: italic;
-}
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 :root {
   font-size: 62.5%;
 }
@@ -165,9 +143,9 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Caslon", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 400;
+  font-family: "Cormorant Garamond", sans-serif;
+  font-size: 1.95rem;
+  font-weight: 500;
   line-height: 1.5;
   color: #282828;
   text-align: left;
@@ -474,7 +452,7 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-size: 3.4rem;
+  font-size: 3.7rem;
 }
 
 h3, .h3 {
@@ -1543,10 +1521,9 @@ mark,
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.8rem 1.9rem;
-  font-size: 1.8rem;
+  font-size: 2.0rem;
   line-height: 1.5;
-  border-radius: 999rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: 999rem; color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -6155,7 +6132,8 @@ strong {
   }
 }
 .book .book-title {
-  font-size: 2.8rem;
+  font-size: 3.1rem;
+  line-height: 1.05;
   color: #fff;
   text-align: center;
   margin: 0;
@@ -6163,7 +6141,7 @@ strong {
 }
 @media (min-width: 768px) {
   .book .book-title {
-    font-size: 4.2rem;
+    font-size: 4.6rem;
   }
 }
 .book .book-scroll {
@@ -6335,13 +6313,13 @@ strong {
 }
 
 .btn.btn-primary {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .btn.btn-primary {
   background: transparent;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 600;
   border-radius: 0;
   border: 1px solid #000;
   position: relative;
