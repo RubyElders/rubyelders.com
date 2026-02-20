@@ -1,29 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&display=swap");
-
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon.eot");
-  src: local("☺"), url("../assets/fonts/caslon.woff") format("woff"), url("../assets/fonts/caslon.ttf") format("truetype"), url("../assets/fonts/caslon.svg") format("svg");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon-bold.eot");
-  src: local("☺"), url("../assets/fonts/caslon-bold.woff") format("woff"), url("../assets/fonts/caslon-bold.ttf") format("truetype"), url("../assets/fonts/caslon-bold.svg") format("svg");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Caslon";
-  src: url("../assets/fonts/caslon-bold-italic.eot");
-  src: local("☺"), url("../assets/fonts/caslon-bold-italic.woff") format("woff"), url("../assets/fonts/caslon-bold-italic.ttf") format("truetype"), url("../assets/fonts/caslon-bold-italic.svg") format("svg");
-  font-weight: 700;
-  font-style: italic;
-}
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 :root {
-  --font-base: "Caslon", serif;
+  --font-base: "Cormorant Garamond", serif;
   --font-alt: "Jost", sans-serif;
 
   --color-text: hsl(0, 0%, 0%);
@@ -43,7 +21,8 @@
 
 body {
   font-family: var(--font-base);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.5;
