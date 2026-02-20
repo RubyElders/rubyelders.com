@@ -9,6 +9,7 @@
   --color-bg: hsl(0, 0%, 100%);
   --color-accent: hsl(0, 0%, 16%);
   --color-accent-hover: hsl(146, 24%, 32%);
+  --color-border: hsl(0, 0%, 0%);
 }
 
 html { font-size: 62.5%; }
@@ -227,7 +228,7 @@ em, i { font-style: italic; }
 
 /* ─── Decorative services box ────────────────────────────── */
 .decorative {
-  border: 1px solid #000;
+  border: 1px solid var(--color-border);
   padding: 8.5rem;
   margin-bottom: 12rem;
   position: relative;
@@ -240,7 +241,7 @@ em, i { font-style: italic; }
   background: var(--color-bg);
   padding: 0 2rem;
   font-size: 3.4rem;
-  font-family: var(--font-main);
+  font-family: var(--font-base);
   font-weight: 700;
   text-transform: uppercase;
   white-space: nowrap;
@@ -391,7 +392,7 @@ em, i { font-style: italic; }
   font-weight: 600;
   font-size: 20px;
   border-radius: 0;
-  border: 1px solid #000;
+  border: 1px solid var(--color-border);
   position: relative;
   line-height: 1;
   padding: 2.4rem;
@@ -417,8 +418,8 @@ em, i { font-style: italic; }
   left: -0.6rem;
   width: 1.1rem;
   height: 1.1rem;
-  background: #000;
-  border: 5px solid #fff;
+  background: var(--color-text);
+  border: 5px solid var(--color-bg);
 }
 .btn .dots.dots-left  { left: 0; }
 .btn .dots.dots-left::after  { top: auto; bottom: -0.6rem; }
@@ -431,7 +432,7 @@ em, i { font-style: italic; }
 .btn:hover .dots::after,
 .btn:focus .dots::before,
 .btn:focus .dots::after {
-  border: 0px solid #fff;
+  border: 0px solid var(--color-bg);
   width: 0;
   height: 0;
   transition: border 0.5s, width 0.5s, height 0.5s;
@@ -439,3 +440,41 @@ em, i { font-style: italic; }
 
 /* ─── Misc ───────────────────────────────────────────────── */
 b, strong { font-weight: 700; }
+
+/* ─── Dark mode ──────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: hsl(0, 0%, 88%);
+    --color-bg: hsl(0, 0%, 10%);
+    --color-accent: hsl(0, 0%, 75%);
+    --color-accent-hover: hsl(146, 24%, 55%);
+    --color-border: hsl(0, 0%, 75%);
+  }
+
+  /* Book hero: no image in dark mode until replacement found */
+  .book {
+    background-image: none;
+    height: auto;
+    padding: 4rem 0;
+  }
+  .book-wrapper { flex: 0 0 auto; }
+  .book-title { color: var(--color-text); text-shadow: none; }
+  /* Remove content overlap — no hero image to overlap into */
+  .content { top: 0; }
+
+  /* Scroll arrow: black SVG → white */
+  .book-scroll::before { filter: invert(1); }
+
+  /* Divider SVGs: black → white */
+  .divider::before,
+  .divider-end::before { filter: invert(1); }
+
+  /* Corner ornaments: invert SVG, clear bg so dark bg shows through */
+  .decorative-ornament-left::before,
+  .decorative-ornament-left::after,
+  .decorative-ornament-right::before,
+  .decorative-ornament-right::after {
+    background-color: transparent;
+    filter: invert(1);
+  }
+}
