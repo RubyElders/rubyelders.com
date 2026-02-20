@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SchnellMCP: Ruby native MCP server experience | Ruby Elders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/writings.css" />
+    <link href="/writings.atom" type="application/atom+xml" rel="alternate" title="Ruby Elders' writings" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+
+    <meta property="og:title" content="SchnellMCP: Ruby native MCP server experience" />
+
+    <meta property="og:description" content="Inspired by Python's FastMCP simplicity, SchnellMCP brings the same elegant developer experience to Ruby. Create powerful MCP servers with plain Ruby methods, native type annotations, and a single decorator — no complexity, just Ruby doing what it does best." />
+
+    <meta property="og:image" content="https://rubyelders.com/assets/img/writings/schnell_og_image.png" />
+
+    <!-- Syntax Highlighting: Prism.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/writings.html">
+        <svg
+          viewBox="0 0 279.09328 71.770356"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m 236.07491,44.384808 c 0,-0.1 -0.2,-0.3 -0.4,-0.4 -1.2,-0.5 -3.7,-0.9 -5.7,-0.9 -3.8,0 -6.5,2.3 -6.5,5.4 0,3 2.2,4.9 4.7,5.9 2,0.8 5.6,1.6 5.6,4.2 0,1.4 -1.6,2.8 -3.2,2.8 -2.2,0 -4.4,-1.8 -5.6,-4.6 -0.4,-1 -0.6,-1.2 -0.9,-1.2 -0.3,0 -0.4,0.3 -0.4,0.7 l 0.3,3.9 c 0,0.7 0.2,1 0.9,1.2 1.9,0.4 3.7,1 5.4,1 4,0 7.5,-3 7.5,-6.5 0,-3.7 -3.5,-5.1 -6.3,-6.3 -2.8,-1.2 -4,-2.1 -4,-3.3 0,-1.3 1.5,-2.4 3.3,-2.4 2,0 4.2,1.8 4.9,4 0.3,0.8 0.4,0.9 0.8,0.9 0.3,0 0.4,-0.1 0.4,-0.4 v -0.3 z"
+          />
+          <path
+            d="m 211.77491,47.384808 v -3.3 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.7,0.3 -0.8,0.3 -1.3,0.5 -2.9,1.2 -5.7,2 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 7.5 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -1.1,0 -2,-0.7 -2,-2.7 v -8.2 c 1.2,-1.7 1.8,-2.3 2.6,-2.3 0.3,0 0.7,0.2 1.2,0.4 0.9,0.4 1.6,0.6 2.1,0.6 1.5,0 2.6,-1 2.6,-2.4 0,-1.3 -1.1,-2.3 -2.6,-2.3 -1.7,-0.2 -4,1.6 -5.8,3.8"
+          />
+          <path
+            d="m 200.57491,56.284808 c -0.1,0 -0.2,0.1 -0.3,0.2 -1.5,2 -3.9,3.2 -6,3.2 -3.3,0 -5.9,-3.2 -5.9,-7.4 0,-0.1 0,-0.3 0,-0.6 h 8.2 2.9 c 1.1,0 1.5,-0.5 1.5,-1.3 0,-0.3 0,-0.7 -0.2,-1.2 -1.2,-3.4 -4.4,-5.8 -8.3,-5.8 -5.2,0 -9.2,4.4 -9.2,10 0,5 4,9.4 8.6,9.4 3.9,0 7.2,-2.3 9,-5.3 0.2,-0.3 0.3,-0.6 0.3,-0.9 -0.1,-0.1 -0.3,-0.3 -0.6,-0.3 z m -8.4,-11.7 c 2.5,0.1 3.9,1.9 3.9,4.9 0,0.3 -0.1,0.7 -0.9,0.7 h -2.8 -3.9 c 0.3,-3.7 1.5,-5.6 3.7,-5.6 z"
+          />
+          <path
+            d="m 179.87491,60.784808 c -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -25.1 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 6.9 c -1.4,-0.6 -2.6,-1 -3.9,-1 -6.1,0 -9.8,4 -9.8,10.4 0,5.3 3.5,9.2 8.3,9.2 1.8,0 4.4,-1 5.5,-2 v 1.7 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.4,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c -0.1,-0.2 -0.2,-0.2 -0.3,-0.3 z m -6.9,-2.1 c -1,1.4 -1.6,1.8 -3,1.8 -3.6,0 -5.9,-3.3 -5.9,-8.3 0,-4.7 1.8,-7.8 4.6,-7.8 2.2,0 3.6,1.4 4.2,3.7 z"
+          />
+          <path
+            d="m 153.37491,32.484808 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 20.2 c 0,2 -0.9,2.7 -2,2.7 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 9.8 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.5 c -1.1,0 -2,-0.7 -2,-2.7 z"
+          />
+          <path
+            d="m 123.27491,47.484808 h 6.4 c 3,0 4.9,2.8 4.9,5.2 v 0.6 c 0,0.2 0,0.2 0.2,0.2 h 1.1 c 0.1,0 0.2,0 0.2,-0.2 v -13.5 c 0,-0.2 0,-0.2 -0.2,-0.2 h -1.1 c -0.2,0 -0.2,0 -0.2,0.2 v 0.6 c 0,2.4 -1.9,5.2 -4.9,5.2 h -6.4 v -8.2 c 0,-3.6 0.3,-4.2 4.6,-4.2 4.5,0 9.1,1.1 11.7,4.7 0.8,1.1 1.3,1.7 1.8,1.7 0.3,0 0.4,-0.2 0.4,-0.6 0,-0.2 -0.1,-0.6 -0.3,-1 l -2.5,-5.7 c -0.3,-0.6 -0.3,-0.6 -1.1,-0.6 h -24.3 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 h -0.6 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 25 c 0.6,0 0.7,-0.2 0.9,-0.6 l 2,-6.4 c 0.2,-0.5 0.2,-0.9 0.2,-1.1 0,-0.3 -0.1,-0.6 -0.3,-0.6 -0.5,0 -1,0.8 -2,2.2 -2.7,3.9 -4.6,4.9 -11.5,4.9 -3.3,0 -4.6,-0.5 -4.6,-1.6 z"
+          />
+          <path
+            d="m 91.2,62.77035 -1.3,2.700008 c -0.3,0.9 -1.1,1.6 -2.2,1.6 h -0.4 c -2.4,0 -3.6,0.9 -3.6,2.6 0,1.2 1,2.1 2.3,2.1 1.8,0 3.1,-1.2 4.5,-4.3 L 99.000004,48.87035 c 1.099996,-2.5 2.299996,-3.2 3.499996,-3.3 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.100004,0.1 1.500004,0.5 1.500004,1.3 0,0.4 -0.1,1 -0.3,1.3 l -3.900004,8.5 -4,-9.1 c -0.3,-0.5 -0.3,-0.9 -0.3,-1.1 0,-0.6 0.6,-0.8 1.6,-0.8 h 0.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.2 c 0,-0.1 0,-0.2 -0.2,-0.2 H 81.8 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.3,0 1.9,0.6 2.5,2 z"
+          />
+          <path
+            d="m 70.7,43.07035 c -2.3,0 -4.4,1.1 -6,2.4 v -13 c 0,-0.4 0,-0.6 -0.3,-0.6 -0.2,0 -0.5,0 -0.6,0.1 -0.8,0.3 -3.4,0.7 -5.9,1.1 -0.2,0 -0.2,0.1 -0.2,0.3 v 0.7 c 0,0.1 0.1,0.2 0.2,0.2 1.7,0.3 2.1,1 2.1,3.3 v 25.1 l 0.7,-0.1 1.7,-1.6 0.5,-0.3 c 2.6,1.4 4.2,1.9 6.2,1.9 5.2,0 9.4,-4.6 9.4,-10.2 0,-5.4 -3.3,-9.3 -7.8,-9.3 z m -1.5,18.3 c -0.9,0 -2,-0.4 -2.8,-1 -1.4,-1.1 -1.6,-1.6 -1.6,-4 v -9.6 c 1.2,-0.9 1.7,-1.1 3,-1.1 3.7,0 6.3,3.5 6.3,8.2 0,4.2 -2.1,7.5 -4.9,7.5 z"
+          />
+          <path
+            d="m 42,62.47035 c 2.5,0 4.4,-0.7 6.2,-2.9 v 2.4 c 0,0.4 0,0.6 0.3,0.6 0.2,0 0.5,0 0.6,-0.1 0.8,-0.3 3.3,-0.7 5.9,-1.1 0.2,0 0.2,-0.1 0.2,-0.3 v -0.7 c 0,-0.1 -0.1,-0.2 -0.2,-0.2 -1.7,-0.3 -2.1,-1 -2.1,-3.3 v -12.7 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.3 c -1.5,2.3 -2.6,3.3 -4.3,3.3 -1.7,0 -3.1,-1.5 -3.1,-3.3 v -13.3 c 0,-0.1 0,-0.2 -0.2,-0.2 h -7.1 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 1.1,0 2,0.7 2,2.7 v 9.2 c -0.1,3.1 2.5,5.1 5.9,5.1"
+          />
+          <path
+            d="m 31.2,60.47035 h -0.8 c -1.3,0 -2.5,-0.5 -3.3,-1.7 -0.9,-1.3 -1.3,-2.7 -3,-6.2 -1.5,-2.9 -2.4,-4.5 -3.9,-5.9 -0.2,-0.2 -0.3,-0.3 -0.3,-0.4 0,-0.1 0.1,-0.2 0.4,-0.2 4.2,-1 6.4,-3.3 6.4,-6.7 0,-4.8 -4.6,-7.7 -12.1,-7.7 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.2 0,0.2 0.2,0.2 h 0.6 c 2.4,0 3.3,0.6 3.3,3.6 v 20.1 c 0,3 -0.9,3.6 -3.3,3.6 H 0.2 c -0.2,0 -0.2,0 -0.2,0.2 v 1.1 c 0,0.1 0,0.2 0.2,0.2 h 13.6 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.2 0,-0.2 -0.2,-0.2 h -0.6 c -2.4,0 -3.2999999,-0.6 -3.2999999,-3.6 v -9.8 H 14 c 1.1,0.8 1.6,1.5 2.8,3.8 1.5,2.9 3.1,6.3 4.9,10.8 0.1,0.2 0.2,0.3 0.5,0.3 h 9 c 0.2,0 0.2,0 0.2,-0.2 v -1.1 c 0,-0.1 0,-0.2 -0.2,-0.2 z m -19.1,-14.6 c -0.5,0 -1.2,0 -2.1999999,-0.1 v -9.6 c 0,-2.9 0.6999999,-3.4 3.1999999,-3.4 5.3,0 7.9,2 7.9,5.9 0.1,4.4 -3.4,7.2 -8.9,7.2 z"
+          />
+          <g id="hat">
+            <path
+              d="m 239.54646,29.219694 c 2.4,1.6 4.3,2.8 6.3,3.9 0.3,0.2 0.6,0.3 0.9,0.5 5.4,3.1 10.3,5.5 15.1,7.4 1.7,0.7 3.4,1.3 4.9,1.8 0.9,-2.5 2.3,-5.8 4.2,-9.1 2.9,-5 6.4,-9.1 7.9,-10.7 0.4,-0.4 0.3,-1 -0.2,-1.2 l -37.7,-21.7 c -0.5,-0.3 -1,0 -1.2,0.5 -0.6,2.1 -2.4,7.2 -5.3,12.2 -1.9,3.3 -4.1,6.1 -5.8,8.2 1.2,1.1 2.6,2.2 4,3.3 2.1,1.6 4.5,3.4 6.9,4.9 z"
+            />
+            <path
+              d="m 275.04646,48.019694 c -5.1,0.5 -10.3,-0.3 -15.3,-1.7 -5.8,-1.6 -11.3,-4 -16.4,-7 -5.1,-3 -10,-6.6 -14.3,-10.8 -3.6,-3.6 -7,-7.7 -9.1,-12.4 -0.2,-0.3 0.2,-0.6 0.5,-0.5 0,0 0.1,0 0.1,0.1 3.3,3.8 6.9,7.1 10.8,10.1 2.3,1.7 4.5,3.4 6.9,5 2.1,1.4 4.2,2.8 6.4,4 0.3,0.2 0.6,0.3 0.9,0.5 4.9,2.8 10,5.4 15.3,7.5 4.6,1.8 9.2,3.4 14.2,4.3 h 0.1 c 0.3,0.4 0.3,0.9 -0.1,0.9 z"
+            />
+          </g>
+        </svg>
+      </a>
+    </header>
+
+    <article>
+  <header>
+    <h1>SchnellMCP: Ruby native MCP server experience</h1>
+
+    <p class="post-meta">
+      <span class="avatar-text-group">
+        <span class="avatar-name">
+          By
+          <img id="avatar-photo" src="https://avatars.githubusercontent.com/u/193936?v=4" alt="simi avatar">
+          <a href="https://github.com/simi" target="_blank" rel="nofollow noopener"> simi </a>
+        </span>
+        <span class="avatar-meta"> February 20, 2026 — Praha, Žižkov</span>
+      </span>
+    </p>
+  </header>
+
+  <p><em>Do you have, like me, a bunch of Ruby scripts that make your life easier? Why not make them available to your <a href="https://en.wikipedia.org/wiki/AI_assistant" target="_blank" rel="nofollow noopener">e-friends</a> too?</em></p>
+
+<h2 id="the-trigger">The Trigger</h2>
+
+<p>A few weeks ago, I was exploring <strong><a href="https://temporal.io/" target="_blank" rel="nofollow noopener">Temporal</a></strong> (looks promising, worth checking out) and stumbled into a <a href="https://docs.temporal.io/ai-cookbook/hello-world-durable-mcp-server" target="_blank" rel="nofollow noopener">tutorial</a> about building an <a href="https://modelcontextprotocol.io/docs/learn/server-concepts" target="_blank" rel="nofollow noopener"><strong>MCP server</strong></a>. It used Python with the <a href="https://gofastmcp.com/getting-started/welcome" target="_blank" rel="nofollow noopener"><strong>FastMCP library</strong></a>. I’d been curious about <strong><a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" rel="nofollow noopener">MCP</a></strong> for a while but kept putting it off, thinking it’d be complicated.</p>
+
+<p>Then I saw the example. It was <strong>suspiciously simple</strong>: a plain Python method, a docstring, type annotations, and a single decorator. That’s it. One decorator, and suddenly your e-friend can call it. That simplicity caught me. <strong>Could Ruby feel this natural?</strong></p>
+
+<figure>
+  <picture>
+    <img src="/assets/img/writings/schnell_python.png" alt="This amazed me, are you amazed also?">
+  </picture>
+  <figcaption>
+    This amazed me, are you amazed also?
+  </figcaption>
+</figure>
+
+<hr>
+
+<h2 id="whats-already-out-there">What’s Already Out There</h2>
+
+<p>I started looking. What did Ruby already have for MCP?</p>
+
+<ul>
+  <li>
+<a href="https://github.com/modelcontextprotocol/ruby-sdk" target="_blank" rel="nofollow noopener"><strong>ruby-sdk</strong></a> — maintained by <img src="https://avatars.githubusercontent.com/u/13203?v=4" class="avatar"> <a href="https://github.com/koic" target="_blank" rel="nofollow noopener">Koichi ITO (@koic)</a>
+    <ul>
+      <li>Official, low-level protocol implementation</li>
+      <li>Great foundation for building on top</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://github.com/funwarioisii/mcp-rb" target="_blank" rel="nofollow noopener"><strong>mcp-rb</strong></a> — created by <img src="https://avatars.githubusercontent.com/u/20943066?v=4" class="avatar"> <a href="https://github.com/funwarioisii" target="_blank" rel="nofollow noopener">Kazuyuki Hashimoto (@funwarioisii)</a>
+    <ul>
+      <li>Full-featured, supports resources and templates</li>
+      <li>Rake/Thor-like experience with tool definitions separate from code</li>
+    </ul>
+  </li>
+  <li>
+<a href="https://github.com/yjacquin/fast-mcp" target="_blank" rel="nofollow noopener"><strong>fast-mcp</strong></a> — created by <img src="https://avatars.githubusercontent.com/u/51963063?v=4" class="avatar"> <a href="https://github.com/yjacquin" target="_blank" rel="nofollow noopener">Yorick Jacquin (@yjacquin)</a>
+    <ul>
+      <li>Chained DSL doesn’t quite have that Ruby feel</li>
+    </ul>
+  </li>
+</ul>
+
+<p>All solid projects doing great work. But I wanted something different: <strong>take code I’ve already written, add annotations, and it becomes an MCP server.</strong> No DSL to learn. No separate tool definitions. Why write special instructions just for your e-friend when the code and its docs already say everything that needs saying?</p>
+
+<h2 id="the-idea">The Idea</h2>
+
+<p>Then it clicked. Ruby’s had method documentation for decades — <a href="https://ruby.github.io/rdoc/" target="_blank" rel="nofollow noopener"><strong>RDoc</strong></a> and <a href="https://yardoc.org/" target="_blank" rel="nofollow noopener"><strong>YARD</strong></a>. I already write <code>@param</code> types and <code>@return</code> descriptions. That metadata is already there.</p>
+
+<p>What if one tag — just <code>@mcp.tool</code> — could turn a documented method into something your e-friend can call? No new syntax. No separation between “tool definition” and “actual code.” Just annotated Ruby.</p>
+
+<p>Bonus: LLMs love generating YARD comments. I usually delete them. <strong>Finally, a reason to keep them</strong> — turns out e-friends benefit from the same docs you do.</p>
+
+<h2 id="building-it">Building It</h2>
+
+<p>The result is what I currently call <a href="https://github.com/RubyElders/schnellmcp" target="_blank" rel="nofollow noopener"><strong>SchnellMCP</strong></a>. Plain Ruby methods + YARD docs = (also) MCP tools. Here’s a simple example:</p>
+
+<pre><code class="language-ruby">require 'bundler/inline'
+
+gemfile do
+  source 'https://gem.coop'
+  gem 'schnellmcp', git: 'https://github.com/RubyElders/schnellmcp'
+end 
+
+require 'schnellmcp'
+
+# Add two numbers
+#
+# @param a [Integer] First number
+# @param b [Integer] Second number
+#
+# @return [Integer] Sum of a and b
+#
+# @mcp.tool
+def add(a, b)
+  a + b
+end
+
+# Start the MCP server if called directly
+SchnellMCP::Server.run(__FILE__) if __FILE__ == $0
+</code></pre>
+
+<p>Standard YARD documentation. One <code>@mcp.tool</code> tag. Done. The MCP tool description and parameter types come straight from the docs. Type casting is automatic.</p>
+
+<p>Code that feels like Ruby, not “MCP framework code.” That’s what I was after.</p>
+
+<h2 id="daily-use">Daily Use</h2>
+
+<p>I’ve been working on a C++ project — not my strongest language, so LLMs help a lot. The usual flow: write code, compile, test, repeat. But C++ build state is a minefield. What’s the current state of the build? Is my latest change actually included? Did cache invalidation properly detect my file changed during compilation? Is the build folder properly bootstrapped and up to date with the latest CMake configuration? These questions sound silly until you’ve wasted an hour debugging code that wasn’t even running.</p>
+
+<p>Classic example: add a log line to debug something, run the code, line doesn’t appear. Now what? Was the file rebuilt at all? Do I need to rebuild and try again? Clear the cache and start fresh just to be sure? Without knowing the history and current state, it’s genuinely hard to tell. Sound familiar?</p>
+
+<p>I wrapped the whole thing into a Ruby script — one command that ensures every run starts from a predictable state. Build folder, cache, compilation — handled, every time. No more build archaeology before getting to the actual problem. Sometimes I trigger it myself, sometimes it’s part of a larger script. No more guessing, no more side-quests.</p>
+
+<p>And then with one <code>@mcp.tool</code> annotation, the same script became available to my e-friend too. Same tool, same predictable state — now my e-friend doesn’t get sidetracked on build archaeology either, and can focus on what actually matters.</p>
+
+<p>One plain Ruby file covers all three use cases naturally: CLI for quick manual runs, MCP server for the e-friends, and a regular <code>require</code> when another script needs it. No extra framework, no duplication, just Ruby. Here’s a partial example — just the preset listing task — to show the idea:</p>
+
+<pre><code class="language-ruby">require 'bundler/inline'
+
+gemfile do
+  source 'https://gem.coop'
+  gem 'schnellmcp', git: 'https://github.com/RubyElders/schnellmcp'
+end
+
+require 'schnellmcp'
+require 'json'
+
+# List available CMake presets
+#
+# @param path [String] Path to directory containing CMakePresets.json
+#
+# @return [Array&lt;String&gt;] List of available preset names
+#
+# @mcp.tool
+def list_cmake_presets(path = ".")
+  presets_file = File.join(path, "CMakePresets.json")
+  data = JSON.parse(File.read(presets_file))
+  data["configurePresets"].map { |preset| preset["name"] }
+end
+
+# Run based on how the script was invoked
+if __FILE__ == $0
+  if ARGV[0] == "server"
+    # MCP server mode for e-friends
+    SchnellMCP::Server.run(__FILE__)
+  else
+    # CLI mode for humans
+    puts list_cmake_presets(".")
+  end
+end
+</code></pre>
+
+<p>One file, three modes:</p>
+
+<ul>
+  <li>
+<code>ruby cmake.rb server</code> — MCP server for my e-friend</li>
+  <li>
+<code>ruby cmake.rb</code> — CLI for quick checks</li>
+  <li>
+<code>require_relative 'cmake'</code> — library for other scripts</li>
+</ul>
+
+<p>Same code, three ways to use it. Plain Ruby throughout — testable, composable, nothing special.</p>
+
+<p>The CMake example captures the whole idea: I wrote the script because I needed clarity. My e-friend needed that same clarity. One tool, useful for everyone — including my e-friend.</p>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p><strong>SchnellMCP is a prototype</strong> — single files only, no dependency parsing. Just enough to work with <a href="https://github.com/features/copilot" target="_blank" rel="nofollow noopener">GitHub Copilot</a>, which is what I use. And I’ve been running it daily for months, steadily adding more tools as I find scripts worth exposing.</p>
+
+<p>It would probably deserve a proper backend at some point — like the aforementioned <a href="https://github.com/modelcontextprotocol/ruby-sdk" target="_blank" rel="nofollow noopener">ruby-sdk</a> for solid protocol handling — but even with the current minimal and hacky code it still fully works, and honestly I haven’t found a reason to rush that yet.</p>
+
+<p>Check it out at <a href="https://github.com/RubyElders/schnellmcp" target="_blank" rel="nofollow noopener"><strong>github.com/RubyElders/schnellmcp</strong></a> — and if you have a drawer full of little Ruby scripts, you’re probably closer to an MCP server than you think.</p>
+
+<p><strong>Have your own stories of Ruby tools and e-friend integration? Come say hi on</strong> <a href="https://ruby.social/@rubyelders" target="_blank" rel="nofollow noopener">Mastodon</a>, <a href="https://rubyelders.bsky.social" target="_blank" rel="nofollow noopener">Bluesky</a> <strong>or</strong> <a href="https://x.com/RubyElders" target="_blank" rel="nofollow noopener">Twitter/X</a> <strong>— and above all, good luck educating your e-friends with your own dev habits. 🤖</strong></p>
+
+</article>
+
+<hr class="end">
+
+<center><a href="/writings.html">Back to writings list.</a></center>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-ruby.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+    <script src="/assets/js/writings.js"></script>
+  </body>
+</html>
+
