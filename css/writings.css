@@ -1,81 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+/* ─── Writings-specific variables ───────────────────────── */
 
 :root {
-  --font-base: "Cormorant Garamond", serif;
-  --font-alt: "Jost", sans-serif;
-
-  --color-text: hsl(0, 0%, 0%);
-  --color-bg: hsl(0, 0%, 100%);
-  --color-accent: hsl(0, 0%, 16%);
-  --color-accent-hover: hsl(146, 24%, 32%);
-  --color-code-bg: hsl(240, 20%, 95%);
-
   --line-height-base: 1.5;
-  --gap-base: 1.25rem;
-  --gap-large: 1.125rem;
+  --gap-base:         1.25rem;
+  --gap-large:        1.125rem;
+  --font-size-base:   1.4rem;
+  --font-size-meta:   1.2rem;
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ─── Page body ──────────────────────────────────────────── */
 
 body {
-  font-family: var(--font-base);
   font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.5;
-  margin: 0;
   padding: var(--gap-base);
   max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 700;
-  color: var(--color-text);
+h1, h2, h3 {
   margin-top: var(--gap-large);
   margin-bottom: var(--gap-base);
 }
 
-h1 {
-  font-size: 2.625rem;
-}
+h1 { font-size: 2.625rem; }
+h2 { font-size: 2.125rem; }
+h3 { font-size: 1.5rem; }
 
-h2 {
-  font-size: 2.125rem;
-}
+p { margin-bottom: var(--gap-base); }
 
-h3 {
-  font-size: 1.5rem;
-}
-
-p {
-  margin-bottom: var(--gap-base);
-}
-
-strong,
-b {
-  font-weight: 700;
-}
-
-em,
-i {
-  font-style: italic;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration: underline;
-}
-
-a:hover {
-  color: var(--color-accent-hover);
-}
+/* ─── Code ───────────────────────────────────────────────── */
 
 code {
   font-family: monospace;
@@ -96,6 +50,8 @@ pre {
   border-left: 4px solid var(--color-accent);
   margin-bottom: var(--gap-base);
 }
+
+/* ─── Post meta ──────────────────────────────────────────── */
 
 .post-meta {
   font-size: 1.3rem;
@@ -132,93 +88,37 @@ img.avatar {
   white-space: nowrap;
 }
 
-.avatar-meta {
-  white-space: nowrap;
-}
-
-.avatar-meta::before {
-  content: "— ";
-}
+.avatar-meta { white-space: nowrap; }
+.avatar-meta::before { content: "— "; }
 
 @media (max-width: 360px) {
-  .avatar-meta {
-    white-space: normal;
-  }
-
-  .avatar-meta::before {
-    content: "";
-  }
+  .avatar-meta { white-space: normal; }
+  .avatar-meta::before { content: ""; }
 }
 
-.site-header {
-  width: 100%;
-}
+/* ─── Site header ────────────────────────────────────────── */
 
-.site-header svg {
-  fill: var(--color-text);
-}
+.site-header { width: 100%; }
+.site-header svg { fill: var(--color-text); }
+.site-logo { display: block; width: 100%; max-width: 100%; height: auto; }
 
-.site-logo {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
+/* ─── Animations ─────────────────────────────────────────── */
 
-@keyframes wave-hat {
-  0% {
-    transform: rotate(0deg);
-  }
-  30% {
-    transform: rotate(-15deg);
-  }
-  60% {
-    transform: rotate(5deg);
-  }
-  70% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-#hat {
-  transform-origin: center top;
-}
-
-.greet {
-  animation: wave-hat 1.5s ease-in-out forwards;
-}
+.greet { animation: wave-hat 1.5s ease-in-out forwards; }
 
 @keyframes wash-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(180deg);
-  }
-  15% {
-    transform: rotate(180deg);
-  }
-  15% {
-    transform: rotate(180deg);
-  }
-  70% {
-    transform: rotate(2310deg);
-  }
-  100% {
-    transform: rotate(2520deg);
-  }
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(180deg); }
+  15%  { transform: rotate(180deg); }
+  70%  { transform: rotate(2310deg); }
+  100% { transform: rotate(2520deg); }
 }
 
-.spin {
-  animation: wash-spin 3s ease-in-out forwards;
-}
+.spin { animation: wash-spin 3s ease-in-out forwards; }
 
-.post-list {
-  list-style: none;
-}
+/* ─── Post list ──────────────────────────────────────────── */
+
+.post-list { list-style: none; }
 
 .post-list li {
   margin-bottom: var(--gap-base);
@@ -234,12 +134,15 @@ img.avatar {
   font-size: var(--font-size-meta);
 }
 
+/* ─── Dividers ───────────────────────────────────────────── */
+
 hr {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
 }
+
 hr:before {
   content: "";
   background: transparent url("../assets/img/divider.svg") no-repeat center;
@@ -251,17 +154,18 @@ hr.end:before {
   background: transparent url("../assets/img/divider_end.svg") no-repeat center;
 }
 
+/* ─── Lists ──────────────────────────────────────────────── */
+
 ul {
-  list-style: none;       /* hide default bullets */
-  padding-left: 1.2em;    /* space for the arrow */
-}
-ul li::marker {
-  content: "→ ";
+  list-style: none;
+  padding-left: 1.2em;
 }
 
-figure {
-  text-align: center;
-}
+ul li::marker { content: "→ "; }
+
+/* ─── Figures ────────────────────────────────────────────── */
+
+figure { text-align: center; }
 
 figure picture img {
   width: 40rem;
@@ -269,26 +173,13 @@ figure picture img {
   max-width: 100%;
 }
 
-figure.wide picture img {
-  width: unset;
-  max-width: 100%;
-}
+figure.wide picture img { width: unset; max-width: 100%; }
+
+/* ─── Dark mode ──────────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: hsl(0, 0%, 88%);
-    --color-bg: hsl(0, 0%, 10%);
-    --color-accent: hsl(0, 0%, 75%);
-    --color-accent-hover: hsl(146, 24%, 55%);
-    --color-code-bg: hsl(240, 10%, 18%);
-  }
-
-  .post-meta {
-    color: hsl(0, 0%, 62%);
-  }
+  .post-meta { color: hsl(0, 0%, 62%); }
 
   hr:before,
-  hr.end:before {
-    filter: invert(1);
-  }
+  hr.end:before { filter: invert(1); }
 }
