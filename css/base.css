@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+/* ─── Variables ──────────────────────────────────────────── */
+
+:root {
+  --font-base: "Cormorant Garamond", serif;
+  --font-alt:  "Jost", sans-serif;
+
+  --color-text:         hsl(0, 0%, 0%);
+  --color-bg:           hsl(0, 0%, 100%);
+  --color-accent:       hsl(0, 0%, 16%);
+  --color-accent-hover: hsl(146, 24%, 32%);
+  --color-border:       hsl(0, 0%, 0%);
+  --color-code-bg:      hsl(240, 20%, 95%);
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ─── Base typography ────────────────────────────────────── */
+
+body {
+  font-family: var(--font-base);
+  font-weight: 500;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 0;
+}
+
+strong, b { font-weight: 700; }
+em, i     { font-style: italic; }
+
+a       { color: var(--color-accent); text-decoration: underline; }
+a:hover { color: var(--color-accent-hover); }
+
+/* ─── Hat animation ──────────────────────────────────────── */
+
+@keyframes wave-hat {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-15deg); }
+  60%  { transform: rotate(5deg); }
+  70%  { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+#hat { transform-origin: center top; }
+
+/* ─── Dark mode ──────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text:         hsl(0, 0%, 88%);
+    --color-bg:           hsl(0, 0%, 10%);
+    --color-accent:       hsl(0, 0%, 75%);
+    --color-accent-hover: hsl(146, 24%, 55%);
+    --color-border:       hsl(0, 0%, 75%);
+    --color-code-bg:      hsl(240, 10%, 18%);
+  }
+}
